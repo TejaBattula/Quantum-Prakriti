@@ -1,0 +1,17 @@
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .section { padding: var(--space-8) 0; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  h1 { font-size: 2.1rem; }
+  h2 { font-size: 1.65rem; }
+}
+
+@media (max-width: 480px) {
+  .container { width: 94%; }
+  .section { padding: var(--space-7) 0; }
+  .hero { padding-top: 110px; }
+}

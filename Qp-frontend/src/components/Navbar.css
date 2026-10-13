@@ -1,0 +1,87 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(4, 6, 11, 0.55);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: all var(--dur) var(--ease);
+}
+.nav--scrolled {
+  background: rgba(4, 6, 11, 0.85);
+  border-bottom-color: rgba(212, 175, 55, 0.14);
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,0.9);
+}
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 74px;
+  gap: var(--space-5);
+}
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--white);
+  letter-spacing: -0.015em;
+}
+.nav__mark {
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(212,175,55,0.5), rgba(11,22,48,0.95));
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: var(--gold);
+  box-shadow: 0 0 24px -4px rgba(212,175,55,0.55), 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+.nav__dot { color: var(--gold); margin: 0 2px; }
+.nav__links { display: flex; align-items: center; gap: var(--space-5); }
+.nav__link {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  position: relative;
+  padding: 6px 0;
+}
+.nav__link:hover { color: var(--white); }
+.nav__link.is-active { color: var(--white); }
+.nav__link.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 2px;
+  background: var(--grad-gold);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(212,175,55,0.7);
+}
+.nav__toggle { display: none; color: var(--white); padding: 8px; }
+.nav__mobile {
+  display: none;
+  overflow: hidden;
+  border-top: 1px solid rgba(212, 175, 55, 0.12);
+  background: rgba(4, 6, 11, 0.98);
+  backdrop-filter: blur(20px);
+}
+.nav__mobile-inner {
+  display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-5) 0;
+}
+.nav__mobile-link {
+  padding: 14px 4px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color var(--dur-fast) var(--ease);
+}
+.nav__mobile-link.is-active { color: var(--gold); }
+.nav__mobile-cta { margin-top: var(--space-3); }
+
+@media (max-width: 960px) {
+  .nav__links, .nav__cta { display: none; }
+  .nav__toggle { display: block; }
+  .nav__mobile { display: block; }
+}

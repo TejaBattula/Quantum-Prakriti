@@ -1,0 +1,162 @@
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Atom, ShieldCheck, FlaskConical, Compass, Target, Sparkles, Network, HeartHandshake } from 'lucide-react';
+import SectionHeading from '../components/SectionHeading.jsx';
+import '../styles/about.css';
+
+const fade = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-60px' },
+  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+};
+
+export default function About() {
+  return (
+    <>
+      <section className="page-hero">
+        <div className="container">
+          <motion.div {...fade}>
+            <span className="eyebrow">About Q-Prakrithi</span>
+            <h1>A technology company shaped by the quantum horizon</h1>
+            <p className="page-hero__lead">
+              We are building capabilities across quantum technologies and quantum-safe
+              cybersecurity to help organisations prepare for what comes next.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="section section--blue">
+        <div className="container about-grid">
+          <motion.div {...fade}>
+            <span className="eyebrow">Company Introduction</span>
+            <h2>Who we are</h2>
+            <p>
+              Q-Prakrithi Private Limited is a technology company exploring the frontier
+              of quantum computing, emerging technologies, and quantum-safe cybersecurity.
+              We combine technical curiosity with a security-first mindset to explore
+              solutions designed for a post-quantum world.
+            </p>
+            <p className="muted">
+              <em>Placeholder copy — to be replaced with the official company description.</em>
+            </p>
+          </motion.div>
+
+          <motion.div {...fade} className="about-visual">
+            <Atom size={120} strokeWidth={0.8} />
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="section section--dark">
+        <div className="container">
+          <div className="grid grid-2">
+            <motion.article className="about-card" {...fade}>
+              <Compass size={22} />
+              <h3>Vision</h3>
+              <p>To contribute to a future where quantum technologies and secure digital infrastructure advance together responsibly.</p>
+              <span className="about-card__note">Placeholder — pending official vision statement.</span>
+            </motion.article>
+            <motion.article className="about-card" {...fade}>
+              <Target size={22} />
+              <h3>Mission</h3>
+              <p>To explore, research, and build capabilities in quantum technologies and quantum-safe cybersecurity with rigour and care.</p>
+              <span className="about-card__note">Placeholder — pending official mission statement.</span>
+            </motion.article>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--blue">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Technology Philosophy"
+            title="How we approach technology"
+            description="We believe emerging technologies should be explored with clarity, grounded in research, and applied responsibly."
+          />
+          <div className="grid grid-3">
+            {[
+              { icon: FlaskConical, title: 'Research-Driven', desc: 'We ground our exploration in evidence and technical rigour.' },
+              { icon: ShieldCheck, title: 'Security-First', desc: 'Security is treated as a design principle, not an afterthought.' },
+              { icon: Atom, title: 'Quantum Curious', desc: 'We follow advances in quantum computing and related technologies closely.' },
+              { icon: Network, title: 'Resilient by Design', desc: 'We aim for systems that endure through technological shifts.' },
+              { icon: Sparkles, title: 'Emerging Tech', desc: 'We investigate technologies where real-world impact is emerging.' },
+              { icon: HeartHandshake, title: 'Responsible Innovation', desc: 'We consider impact on people and society alongside capability.' },
+            ].map(({ icon: Icon, title, desc }) => (
+              <motion.div key={title} className="about-tile" {...fade}>
+                <Icon size={22} strokeWidth={1.8} />
+                <h4>{title}</h4>
+                <p>{desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--dark">
+        <div className="container about-split">
+          <motion.div {...fade}>
+            <span className="eyebrow">Quantum & Emerging Tech</span>
+            <h2>Exploring the quantum landscape</h2>
+            <p>
+              Quantum computing is an emerging paradigm that leverages quantum mechanical
+              phenomena to process information. Its long-term potential spans areas such
+              as materials science, chemistry, and optimisation — though it is not
+              universally faster than classical computing.
+            </p>
+            <p>
+              We track developments across quantum computing, quantum communication,
+              quantum sensing, and their intersections with other emerging technologies.
+            </p>
+          </motion.div>
+          <motion.div {...fade}>
+            <span className="eyebrow">Quantum-Safe Security</span>
+            <h2>Preparing cryptography for what's next</h2>
+            <p>
+              Post-quantum cryptography refers to cryptographic algorithms designed to
+              resist attacks from both classical and future quantum computers. Standards
+              such as ML-KEM, ML-DSA, and SLH-DSA are part of a broader migration effort
+              across the industry.
+            </p>
+            <p>
+              We focus on understanding cryptographic inventories, assessing risk, and
+              planning quantum-safe migrations.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="section section--blue">
+        <div className="container">
+          <SectionHeading eyebrow="Company Values" title="What we stand for" align="center" />
+          <div className="values-row">
+            {['Innovation', 'Security', 'Responsible Technology', 'Research-Driven Thinking', 'Future-Ready Solutions'].map((v, i) => (
+              <motion.span
+                key={v}
+                className="value-chip"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+              >
+                {v}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--dark">
+        <div className="container center-cta">
+          <h2>Want to work with us?</h2>
+          <p>Explore our services or reach out to start a conversation.</p>
+          <div className="cta-row">
+            <Link to="/services" className="btn btn--gold btn--md">View Services <ArrowRight size={16} /></Link>
+            <Link to="/contact" className="btn btn--ghost btn--md">Contact Us</Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
