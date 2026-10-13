@@ -64,7 +64,7 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <QuantumVisual />
+            <QuantumVisual/>
           </motion.div>
         </div>
       </section>
