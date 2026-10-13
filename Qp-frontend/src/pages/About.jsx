@@ -1,37 +1,108 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Atom, ShieldCheck, FlaskConical, Compass, Target, Sparkles, Network, HeartHandshake } from 'lucide-react';
+import {
+  ArrowRight, Atom, ShieldCheck, FlaskConical, Compass, Target,
+  Sparkles, Network, HeartHandshake, Play, FileText,
+} from 'lucide-react';
 import SectionHeading from '../components/SectionHeading.jsx';
 import '../styles/about.css';
 
 const fade = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0, y: 22 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: '-60px' },
-  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
 };
+
+const heroTelemetry = [
+  { label: 'CODE MATRIX', value: 'ACTIVE' },
+  { label: 'COHERENCE', value: '99.987 QPS' },
+  { label: 'SOVEREIGN ARCHITECTURE', value: 'TIER-1' },
+];
 
 export default function About() {
   return (
     <>
-      <section className="page-hero">
-        <div className="container">
-          <motion.div {...fade}>
-            <span className="eyebrow">About Q-Prakrithi</span>
-            <h1>A technology company shaped by the quantum horizon</h1>
-            <p className="page-hero__lead">
-              We are building capabilities across quantum technologies and quantum-safe
-              cybersecurity to help organisations prepare for what comes next.
-            </p>
+      {/* ============ HERO ============ */}
+      <section className="ahero">
+        <div className="ahero__bg" aria-hidden="true">
+          <div className="ahero__grid" />
+          <div className="ahero__glow ahero__glow--blue" />
+          <div className="ahero__glow ahero__glow--gold" />
+        </div>
+
+        <div className="container ahero__inner">
+          <motion.span
+            className="ahero__pill"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="ahero__pill-dot" />
+            ABOUT Q-PRAKRITHI · EST. 2024
+          </motion.span>
+
+          <motion.h1
+            className="ahero__title"
+            initial={{ opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.05 }}
+          >
+            Pioneering <span className="text-gradient-gold">Quantum</span><br />
+            Intelligence &amp; Sustainable<br />
+            Deep-Tech Systems
+          </motion.h1>
+
+          <motion.p
+            className="ahero__lead"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.15 }}
+          >
+            Bridging the eternal balance of natural synergy{' '}
+            <em className="ahero__em">(Prakrithi)</em> with quantum computational
+            breakthroughs. We engineer sovereign fault-tolerant hardware and algorithms
+            optimized for planetary equilibrium.
+          </motion.p>
+
+          <motion.div
+            className="ahero__actions"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+          >
+            <Link to="/services" className="ahero__btn ahero__btn--gold">
+              <FileText size={14} /> Our Architectural Blueprint
+            </Link>
+            <a href="#" className="ahero__btn ahero__btn--ghost">
+              <span className="ahero__play"><Play size={9} fill="currentColor" /></span>
+              Watch Keynote
+            </a>
+          </motion.div>
+
+          <motion.div
+            className="ahero__telemetry"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+          >
+            {heroTelemetry.map((t) => (
+              <span key={t.label} className="ahero__telemetry-item">
+                <span className="ahero__telemetry-dot" />
+                <em>{t.label}:</em>
+                <strong>{t.value}</strong>
+              </span>
+            ))}
           </motion.div>
         </div>
       </section>
 
+      {/* ============ FOUNDATION & PHILOSOPHY ============ */}
       <section className="section section--blue">
         <div className="container about-grid">
           <motion.div {...fade}>
-            <span className="eyebrow">Company Introduction</span>
-            <h2>Who we are</h2>
+            <span className="eyebrow">Foundation &amp; Philosophy</span>
+            <h2>The Science of Natural Synergy</h2>
             <p>
               Q-Prakrithi Private Limited is a technology company exploring the frontier
               of quantum computing, emerging technologies, and quantum-safe cybersecurity.
@@ -49,6 +120,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* ============ VISION & MISSION ============ */}
       <section className="section section--dark">
         <div className="container">
           <div className="grid grid-2">
@@ -68,6 +140,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* ============ TECHNOLOGY PHILOSOPHY ============ */}
       <section className="section section--blue">
         <div className="container">
           <SectionHeading
@@ -94,10 +167,11 @@ export default function About() {
         </div>
       </section>
 
+      {/* ============ QUANTUM & SECURITY SPLIT ============ */}
       <section className="section section--dark">
         <div className="container about-split">
           <motion.div {...fade}>
-            <span className="eyebrow">Quantum & Emerging Tech</span>
+            <span className="eyebrow">Quantum &amp; Emerging Tech</span>
             <h2>Exploring the quantum landscape</h2>
             <p>
               Quantum computing is an emerging paradigm that leverages quantum mechanical
@@ -112,7 +186,7 @@ export default function About() {
           </motion.div>
           <motion.div {...fade}>
             <span className="eyebrow">Quantum-Safe Security</span>
-            <h2>Preparing cryptography for what's next</h2>
+            <h2>Preparing cryptography for what&rsquo;s next</h2>
             <p>
               Post-quantum cryptography refers to cryptographic algorithms designed to
               resist attacks from both classical and future quantum computers. Standards
@@ -127,6 +201,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* ============ VALUES ============ */}
       <section className="section section--blue">
         <div className="container">
           <SectionHeading eyebrow="Company Values" title="What we stand for" align="center" />
@@ -147,6 +222,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* ============ CTA ============ */}
       <section className="section section--dark">
         <div className="container center-cta">
           <h2>Want to work with us?</h2>

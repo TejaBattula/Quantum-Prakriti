@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Atom } from 'lucide-react';
+import { Menu, X, Atom, Globe, Languages } from 'lucide-react';
 import './Navbar.css';
 
 const links = [
@@ -31,10 +31,14 @@ export default function Navbar() {
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="nav__inner container">
         <Link to="/" className="nav__brand" aria-label="Q-Prakrithi home">
-          <span className="nav__mark"><Atom size={22} strokeWidth={2.2} /></span>
-          <span className="nav__word">
-            Q<span className="nav__dot">·</span>Prakrithi
+          <span className="nav__mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" fill="currentColor"/>
+              <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.4" opacity="0.7"/>
+              <circle cx="12" cy="12" r="10.5" stroke="currentColor" strokeWidth="1" opacity="0.35"/>
+            </svg>
           </span>
+          <span className="nav__word">Q-Prakrithi</span>
         </Link>
 
         <nav className="nav__links" aria-label="Primary">
@@ -50,9 +54,20 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="nav__cta">
-          <Link to="/services" className="btn btn--gold btn--sm">
-            Explore Our Technology
+        <div className="nav__right">
+          <button className="nav__icon-btn" aria-label="Language">
+            <Languages size={16} />
+          </button>
+          <button className="nav__icon-btn" aria-label="Region">
+            <Globe size={16} />
+          </button>
+
+          <Link to="/contact" className="nav__portal">Client Portal</Link>
+          <Link to="/contact" className="nav__consult">
+            Consultation
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M7 17L17 7M9 7h8v8" />
+            </svg>
           </Link>
         </div>
 
@@ -86,9 +101,10 @@ export default function Navbar() {
                   {l.label}
                 </NavLink>
               ))}
-              <Link to="/services" className="btn btn--gold btn--md nav__mobile-cta">
-                Explore Our Technology
-              </Link>
+              <div className="nav__mobile-actions">
+                <Link to="/contact" className="nav__portal nav__portal--block">Client Portal</Link>
+                <Link to="/contact" className="nav__consult nav__consult--block">Consultation ↗</Link>
+              </div>
             </div>
           </motion.nav>
         )}
