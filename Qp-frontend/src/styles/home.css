@@ -376,12 +376,15 @@
   .hero__visual {
     min-height: 320px;
     
+    
   }
-  #quantum-slot { min-height: 300px; }
+  #quantum-slot { min-height: 500px; }
   .container.hero__inner{
     display: flex;
     flex-direction: column-reverse;
   }
+  
+  
 }
 /* ===== Move the quantum computer up ===== */
 @media (min-width: 901px) {
