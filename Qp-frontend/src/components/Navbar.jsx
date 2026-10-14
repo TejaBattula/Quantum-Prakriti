@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Atom, Globe, Languages } from 'lucide-react';
 import './Navbar.css';
-
+import qprakritimark from "./qprakritimark.png"
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
@@ -32,11 +32,7 @@ export default function Navbar() {
       <div className="nav__inner container">
         <Link to="/" className="nav__brand" aria-label="Q-Prakriti home">
           <span className="nav__mark">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="3" fill="currentColor"/>
-              <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.4" opacity="0.7"/>
-              <circle cx="12" cy="12" r="10.5" stroke="currentColor" strokeWidth="1" opacity="0.35"/>
-            </svg>
+            <img src={qprakritimark} alt="logo"/>
           </span>
           <span className="nav__word">Q-Prakriti</span>
         </Link>
