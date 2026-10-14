@@ -448,38 +448,7 @@ export default function Careers() {
           </motion.div>
 
           {/* RIGHT — telemetry card */}
-          <motion.aside
-            className="chero__telemetry"
-            initial={{ opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <header className="tele__head">
-              <span className="tele__head-left">
-                <span className="tele__icon">⌬</span>
-                SYS_TELEMETRY: LAB_NODE_09
-              </span>
-              <span className="tele__live">LIVE_STATE</span>
-            </header>
-
-            <div className="tele__rows">
-              {telemetry.map((row) => (
-                <div className="tele__row" key={row.label}>
-                  <span className="tele__label">{row.label}</span>
-                  <span className="tele__value">{row.value}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="tele__footer">
-              <span>GLOBAL SITES: BENGALURU · ZURICH · SF</span>
-              <span className="tele__knot" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
-                  <path d="M12 3v6M12 15v6M3 12h6M15 12h6M5.6 5.6l4.2 4.2M14.2 14.2l4.2 4.2M18.4 5.6l-4.2 4.2M9.8 14.2l-4.2 4.2"/>
-                </svg>
-              </span>
-            </div>
-          </motion.aside>
+          
         </div>
       </section>
 

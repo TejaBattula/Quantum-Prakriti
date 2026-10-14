@@ -403,47 +403,7 @@ export default function Services() {
       </section>
 
       {/* ============ SECTION 03 — TELEMETRY BENCHMARK ============ */}
-      <section className="dash-sec">
-        <div className="container">
-          <motion.div className="bench" {...fadeUp}>
-            <header className="bench__head">
-              <div>
-                <span className="dash-eyebrow">
-                  <span className="dash-eyebrow__dot" /> QUANTUM TELEMETRY BENCHMARK
-                </span>
-                <h2 className="bench__title">
-                  Classical Supercomputing vs. Q-Prakrithi<br />Supremacy
-                </h2>
-              </div>
-              <div className="bench__live">
-                <span className="bench__live-dot" />
-                <span>LIVE VERIFICATION: GPU-<br />A100-80</span>
-              </div>
-            </header>
-
-            <div className="bench__table">
-              <div className="bench__row bench__row--head">
-                <span>DOMAIN CHALLENGE</span>
-                <span>CLASSICAL HPC (50K+ NODES)</span>
-                <span>Q-PRAKRITHI QUANTUM CORE</span>
-                <span>ADVANTAGE MULTIPLIER</span>
-              </div>
-
-              {benchmarks.map((b) => (
-                <div className="bench__row" key={b.domain}>
-                  <span className="bench__domain">
-                    <span className="bench__domain-ico"><b.icon size={13} /></span>
-                    {b.domain}
-                  </span>
-                  <span className="bench__classical">{b.classical}</span>
-                  <span className="bench__quantum">{b.quantum}</span>
-                  <span className={`bench__adv bench__adv--${b.tone}`}>{b.advantage}</span>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* ============ SECTION — ENCRYPTED ADVISORY ============ */}
       <section className="dash-sec dash-sec--advisory">
