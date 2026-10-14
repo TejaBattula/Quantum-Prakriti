@@ -34,10 +34,6 @@
 .nav__mark {
   width: 30px; height: 30px;
   display: grid; place-items: center;
-  border-radius: 8px;
-  background: linear-gradient(150deg, rgba(212,175,55,0.18), rgba(79,127,255,0.10));
-  color: var(--gold);
-  box-shadow: 0 0 18px -4px rgba(212,175,55,0.55);
 }
 .nav__word { white-space: nowrap; }
 
