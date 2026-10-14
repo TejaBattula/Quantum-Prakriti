@@ -18,7 +18,6 @@
   -webkit-user-select: none;
   font-family: 'Syncopate', 'Michroma', 'Arial Black', sans-serif;
   --brand-fs: clamp(28px, 6vw, 96px);
-  height: 100vh;
 }
 
 /* ---------- background ---------- */

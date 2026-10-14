@@ -3,7 +3,7 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Atom, Globe, Languages } from 'lucide-react';
 import './Navbar.css';
-import qprakritimark from "./qprakritimark.png"
+import qprakritimark from  "./q-prakriti-mark.png"
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
