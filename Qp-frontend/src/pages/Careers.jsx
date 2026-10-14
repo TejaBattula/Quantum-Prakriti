@@ -1,9 +1,18 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
-  ChevronDown, Clock, MapPin, Zap, ArrowUpRight, ArrowDown, Filter
+  ChevronDown,
+  Clock,
+  MapPin,
+  Zap,
+  ArrowUpRight,
+  ArrowDown,
+  Filter,
+  X,
+  BriefcaseBusiness,
 } from 'lucide-react';
+
 import '../styles/careers.css';
 
 const fadeUp = {
@@ -97,7 +106,293 @@ const telemetry = [
   { label: 'Post-Quantum Fault Latency',    value: '8.42 µs' },
   { label: 'Sovereign Research Grants',     value: '₹148M / Tier-1' },
 ];
+function ExpandablePositions({ positions }) {
+  const [activePosition, setActivePosition] = useState(null);
+  const modalRef = useRef(null);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setActivePosition(null);
+      }
+    };
+
+    if (activePosition) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [activePosition]);
+
+  useEffect(() => {
+    if (!activePosition) return;
+
+    const handleOutsideClick = (event) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target)
+      ) {
+        setActivePosition(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
+  }, [activePosition]);
+
+  return (
+    <div className="expandable-jobs">
+      {/* Expanded modal backdrop */}
+      <AnimatePresence>
+        {activePosition && (
+          <motion.div
+            className="expandable-jobs__backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            onClick={() => setActivePosition(null)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Expanded job modal */}
+      <AnimatePresence>
+        {activePosition && (
+          <div className="expandable-jobs__modal-layer">
+            <motion.article
+              ref={modalRef}
+              layoutId={`job-card-${activePosition.title}`}
+              className="expanded-job"
+              initial={{ opacity: 0, scale: 0.94, y: 18 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{
+                type: 'spring',
+                stiffness: 280,
+                damping: 28,
+              }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="expanded-job-title"
+            >
+              <div className="expanded-job__top">
+                <div className="expanded-job__symbol">
+                  <BriefcaseBusiness size={22} />
+                </div>
+
+                <span className="expanded-job__status">
+                  <span />
+                  OPEN POSITION
+                </span>
+
+                <button
+                  type="button"
+                  className="expanded-job__close"
+                  onClick={() => setActivePosition(null)}
+                  aria-label="Close job details"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="expanded-job__content">
+                <div className="expanded-job__tags">
+                  <span className="tag tag--dept">
+                    {activePosition.dept}
+                  </span>
+
+                  <span className="tag">
+                    {activePosition.level}
+                  </span>
+
+                  {activePosition.urgent && (
+                    <span className="tag tag--urgent">
+                      <Zap size={10} />
+                      Immediate Hiring
+                    </span>
+                  )}
+                </div>
+
+                <motion.h2
+                  layoutId={`job-title-${activePosition.title}`}
+                  id="expanded-job-title"
+                  className="expanded-job__title"
+                >
+                  {activePosition.title}
+                </motion.h2>
+
+                <p className="expanded-job__description">
+                  {activePosition.desc}
+                </p>
+
+                <div className="expanded-job__details">
+                  <div className="expanded-job__detail">
+                    <span className="expanded-job__detail-label">
+                      DEPARTMENT
+                    </span>
+                    <span>{activePosition.dept}</span>
+                  </div>
+
+                  <div className="expanded-job__detail">
+                    <span className="expanded-job__detail-label">
+                      EXPERIENCE LEVEL
+                    </span>
+                    <span>{activePosition.level}</span>
+                  </div>
+
+                  <div className="expanded-job__detail">
+                    <span className="expanded-job__detail-label">
+                      LOCATION
+                    </span>
+                    <span>
+                      <MapPin size={13} />
+                      {activePosition.location} · {activePosition.type}
+                    </span>
+                  </div>
+
+                  <div className="expanded-job__detail">
+                    <span className="expanded-job__detail-label">
+                      ANNUAL COMPENSATION
+                    </span>
+                    <span className="expanded-job__salary">
+                      {activePosition.salary}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="expanded-job__footer">
+                  <div>
+                    <span className="expanded-job__footer-label">
+                      Q-PRAKRITI CAREERS
+                    </span>
+                    <p>Help shape the next era of quantum computing.</p>
+                  </div>
+
+                  <Link
+                    to="/contact"
+                    className="expanded-job__apply"
+                    onClick={() => setActivePosition(null)}
+                  >
+                    Apply Now
+                    <ArrowUpRight size={15} />
+                  </Link>
+                </div>
+              </div>
+            </motion.article>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Compact job cards */}
+      <div className="expandable-jobs__list">
+        {positions.map((position, index) => (
+          <motion.article
+            key={position.title}
+            layoutId={`job-card-${position.title}`}
+            className="expandable-job-card"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-35px' }}
+            transition={{
+              duration: 0.4,
+              delay: index * 0.06,
+            }}
+            whileHover={{ y: -3 }}
+            onClick={() => setActivePosition(position)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                setActivePosition(position);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label={`View details for ${position.title}`}
+          >
+            <div className="expandable-job-card__icon">
+              <BriefcaseBusiness size={20} />
+            </div>
+
+            <div className="expandable-job-card__main">
+              <div className="job-row__tags">
+                <span className="tag tag--dept">
+                  {position.dept}
+                </span>
+
+                <span className="tag">
+                  {position.level}
+                </span>
+
+                {position.urgent && (
+                  <span className="tag tag--urgent">
+                    <Zap size={9} />
+                    Immediate Hiring
+                  </span>
+                )}
+              </div>
+
+              <motion.h3
+                layoutId={`job-title-${position.title}`}
+                className="job-row__title"
+              >
+                {position.title}
+              </motion.h3>
+
+              <p className="job-row__desc">
+                {position.desc}
+              </p>
+
+              <div className="expandable-job-card__meta">
+                <span>
+                  <MapPin size={12} />
+                  {position.location}
+                </span>
+
+                <span>{position.type}</span>
+              </div>
+            </div>
+
+            <div className="expandable-job-card__side">
+              <span className="job-row__salary-label">
+                ANNUAL BRACKET
+              </span>
+
+              <span className="job-row__salary">
+                {position.salary}
+              </span>
+
+              <span className="expandable-job-card__open">
+                Explore role
+                <ArrowUpRight size={14} />
+              </span>
+            </div>
+          </motion.article>
+        ))}
+
+        {positions.length === 0 && (
+          <div className="job-empty">
+            <Filter size={20} />
+            <p>No positions match the selected filters.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 export default function Careers() {
   const [activeDept, setActiveDept] = useState('All');
   const [activeLoc, setActiveLoc] = useState('All Global Hubs');
@@ -251,45 +546,7 @@ export default function Careers() {
             </div>
           </div>
 
-          <div className="job-list">
-            {filtered.map((p, i) => (
-              <motion.article
-                key={p.title}
-                className="job-row"
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.4, delay: i * 0.04 }}
-              >
-                <div className="job-row__main">
-                  <div className="job-row__tags">
-                    <span className="tag tag--dept">{p.dept}</span>
-                    <span className="tag">{p.level}</span>
-                    {p.urgent && <span className="tag tag--urgent"><Zap size={9} /> Immediate Hiring</span>}
-                    <span className="tag tag--ghost"><MapPin size={10} /> {p.location} / {p.type}</span>
-                  </div>
-
-                  <h3 className="job-row__title">{p.title}</h3>
-                  <p className="job-row__desc">{p.desc}</p>
-                </div>
-
-                <div className="job-row__side">
-                  <span className="job-row__salary-label">ANNUAL BRACKET</span>
-                  <span className="job-row__salary">{p.salary}</span>
-                  <Link to="/contact" className="job-row__apply">
-                    Apply Now <ArrowUpRight size={12} />
-                  </Link>
-                </div>
-              </motion.article>
-            ))}
-
-            {filtered.length === 0 && (
-              <div className="job-empty">
-                <Filter size={20} />
-                <p>No positions match the selected filters.</p>
-              </div>
-            )}
-          </div>
+          <ExpandablePositions positions={filtered} />
         </div>
       </section>
 
