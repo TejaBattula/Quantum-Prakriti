@@ -9,7 +9,6 @@ import {
 import QuantumVisual from '../components/QuantumCore.jsx';
 import ServiceCard from '../components/ServiceCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
-import PqcSection from '../components/PqcSection.jsx';
 import '../styles/home.css';
 
 const fadeUp = {
@@ -178,7 +177,7 @@ export default function Home() {
       </section>
 
       {/* QUANTUM-SAFE CYBERSECURITY */}
-      <PqcSection />
+     
 
       {/* SERVICES PREVIEW */}
       <section className="section section--blue">

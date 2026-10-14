@@ -709,7 +709,7 @@ export default function QuantumLoader({ onComplete, targetSelector }) {
           aria-label="Loading Q-Prakriti"
         >
           <div className="loader-bg" aria-hidden="true">
-            <div className="loader-rays" />
+            <div className="loader-aurora" />
             <div className="loader-grid" />
             <div className="loader-energy loader-energy-blue" />
             <div className="loader-energy loader-energy-gold" />
