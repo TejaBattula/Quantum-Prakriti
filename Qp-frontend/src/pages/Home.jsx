@@ -4,13 +4,60 @@ import { motion } from 'framer-motion';
 import {
   Atom, ShieldCheck, Network, FlaskConical, Cpu, Sparkles,
   ArrowRight, Lock, Fingerprint, FileSearch, GitBranch, ScanSearch,
-  Puzzle, HeartHandshake, Lightbulb, ShieldAlert
+  Puzzle, HeartHandshake, Lightbulb, ShieldAlert, Building2
 } from 'lucide-react';
 import QuantumVisual from '../components/QuantumCore.jsx';
 import ServiceCard from '../components/ServiceCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
+import QTechModalCards from '../components/QTModalCards.jsx';
+import StrokeText from '../components/StrokeText.jsx';
+import FlipCard from '../components/FlipCard.jsx';
 import '../styles/home.css';
+const partners = [
+  { name: 'Partner One', logo: null },     // logo: '/logos/partner-one.png'
+  { name: 'Partner Two', logo: null },
+  { name: 'Partner Three', logo: null },
+  { name: 'Partner Four', logo: null },
+  { name: 'Partner Five', logo: null },
+  { name: 'Partner Six', logo: null },
+];
 
+const customers = [
+  { name: 'Customer One', logo: null },
+  { name: 'Customer Two', logo: null },
+  { name: 'Customer Three', logo: null },
+  { name: 'Customer Four', logo: null },
+  { name: 'Customer Five', logo: null },
+  { name: 'Customer Six', logo: null },
+];
+
+/* Infinite scrolling row: list is rendered twice so the loop is seamless */
+function Marquee({ items, reverse = false, duration = 30 }) {
+  const loop = [...items, ...items];
+  return (
+    <div className="marquee">
+      <div
+        className={`marquee__track${reverse ? ' marquee__track--reverse' : ''}`}
+        style={{ animationDuration: `${duration}s` }}
+      >
+        {loop.map((item, i) => (
+          <div
+            className="marquee__item"
+            key={`${item.name}-${i}`}
+            aria-hidden={i >= items.length ? 'true' : undefined}
+          >
+            {item.logo ? (
+              <img src={item.logo} alt={i < items.length ? item.name : ''} loading="lazy" />
+            ) : (
+              <Building2 size={28} strokeWidth={1.6} />
+            )}
+            <span>{item.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
@@ -57,7 +104,26 @@ function QuantumSlot() {
     </div>
   );
 }
-
+const qtechCards = [
+  { id: 'computing', icon: Cpu, title: 'Quantum Computing',
+    desc: 'Uses quantum bits (qubits) which can exist in superpositions, enabling new computational paradigms.',
+    details: 'Qubits can exist in superpositions and become entangled, which lets certain algorithms approach problems differently from classical bit-based machines. Today’s devices are still limited by noise and scale.' },
+  { id: 'qubits', icon: Atom, title: 'Qubits & Quantum Circuits',
+    desc: 'Qubits are the fundamental units of quantum information; quantum circuits sequence quantum operations.',
+    details: 'A quantum circuit applies gates to qubits in sequence and then measures them. Because measurement collapses the quantum state, algorithms are designed so the correct answer becomes highly probable at the end.' },
+  { id: 'applications', icon: Sparkles, title: 'Applications',
+    desc: 'Areas under active research include materials science, chemistry simulation, and optimisation problems.',
+    details: 'Researchers are studying quantum methods for simulating molecules and materials, and for certain optimisation and sampling problems. Practical advantage remains an open, problem-specific question.' },
+  { id: 'classical', icon: GitBranch, title: 'Classical vs Quantum',
+    desc: 'Quantum computers are not universally faster — for many tasks classical computers remain more efficient.',
+    details: 'Quantum machines are expected to help on specific problem classes, while everyday workloads such as databases, web serving and most analytics stay better suited to classical hardware. Hybrid approaches combine both.' },
+  { id: 'future', icon: Lightbulb, title: 'The Future',
+    desc: 'Continued advances in error correction and hardware will shape real-world quantum usefulness.',
+    details: 'Quantum error correction, which protects fragile qubits by spreading information across many physical qubits, is central to building large, reliable machines. Progress here will determine how useful quantum computers become.' },
+  { id: 'related', icon: Puzzle, title: 'Related Technologies',
+    desc: 'Quantum sensing, communication, and networking extend the quantum technology landscape.',
+    details: 'Quantum sensing targets highly precise measurements, quantum communication includes techniques such as quantum key distribution, and quantum networking explores linking quantum devices together.' },
+];
 export default function Home() {
   return (
     <>
@@ -77,8 +143,25 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="eyebrow">Quantum · Security · Innovation</span>
-            <h1>
-              Engineering a <span className="text-gradient-gold">Quantum-Ready</span> Future
+            <h1 style={{lineHeight :"25px",marginTop : "20px"}}>
+              Engineering a
+              <StrokeText
+                className="hero__stroke"
+                text="Quantum-Ready"
+                strokeColor="#D4AF37"
+                fillColor="#D4AF37"
+                strokeWidth={1.6}
+                drawDuration={1.5}
+                fillDelay={2}
+                stagger={0.2}
+                ease="power2.out"
+                trigger="loop"
+                fillMode="wipe"
+                fontSize={128}
+                fontWeight={800}
+                letterSpacing={-3}
+              />
+              Future
             </h1>
             <p className="hero__lead">
               Exploring quantum technologies and advancing secure, resilient digital
@@ -150,29 +233,7 @@ export default function Home() {
             align="center"
           />
 
-          <div className="grid grid-3 qtech__grid">
-            {[
-              { icon: Cpu, title: 'Quantum Computing', desc: 'Uses quantum bits (qubits) which can exist in superpositions, enabling new computational paradigms.' },
-              { icon: Atom, title: 'Qubits & Quantum Circuits', desc: 'Qubits are the fundamental units of quantum information; quantum circuits sequence quantum operations.' },
-              { icon: Sparkles, title: 'Applications', desc: 'Areas under active research include materials science, chemistry simulation, and optimisation problems.' },
-              { icon: GitBranch, title: 'Classical vs Quantum', desc: 'Quantum computers are not universally faster — for many tasks classical computers remain more efficient.' },
-              { icon: Lightbulb, title: 'The Future', desc: 'Continued advances in error correction and hardware will shape real-world quantum usefulness.' },
-              { icon: Puzzle, title: 'Related Technologies', desc: 'Quantum sensing, communication, and networking extend the quantum technology landscape.' },
-            ].map((item, i) => (
-              <motion.div
-                key={item.title}
-                className="qtech__card"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-              >
-                <div className="qtech__icon"><item.icon size={22} strokeWidth={1.8} /></div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
+          <QTechModalCards cards={qtechCards} />
         </div>
       </section>
 
@@ -195,8 +256,45 @@ export default function Home() {
               { icon: ShieldAlert, title: 'Security Assessment', description: 'Reviewing systems for cryptographic risk and quantum-readiness.' },
               { icon: Cpu, title: 'Software Development', description: 'Building secure, modern software with a future-ready mindset.' },
               { icon: Atom, title: 'Emerging Technologies', description: 'Investigating quantum and adjacent technologies for practical impact.' },
-            ].map((s, i) => (
-              <ServiceCard key={s.title} {...s} index={i} />
+            ].map(({ icon: Icon, title, description }, i) => (
+              <motion.div
+                key={title}
+                className="service-flip-wrap"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+              >
+                <FlipCard
+                  className="service-flip"
+                  ariaLabel={`${title} – flip for details`}
+                  axis="y"
+                  width={360}
+                  height={240}
+                  radius={18}
+                  background="#0c1630"
+                  color="#f5f5f5"
+                  tilt
+                  tiltMax={8}
+                  glare
+                  glareOpacity={0.18}
+                  hoverScale={1.03}
+                  shadowOpacity={0.4}
+                  front={
+                    <div className="service-flip__face service-flip__face--front">
+                      <Icon size={40} strokeWidth={1.6} />
+                      <h4>{title}</h4>
+                      <span className="service-flip__hint">Click to flip</span>
+                    </div>
+                  }
+                  back={
+                    <div className="service-flip__face service-flip__face--back">
+                      <h4>{title}</h4>
+                      <p>{description}</p>
+                    </div>
+                  }
+                />
+              </motion.div>
             ))}
           </div>
           <div className="center-cta">
@@ -236,7 +334,26 @@ export default function Home() {
           </div>
         </div>
       </section>
+            {/* PARTNERS & CUSTOMERS */}
+                  {/* PARTNERS & CUSTOMERS */}
+      <section className="section section--blue">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Our Network"
+            title="Our partners and customers"
+            description="Organisations we collaborate with and serve."
+            align="center"
+          />
+        </div>
 
+        <div className="network">
+          <h3 className="network__label">Partners</h3>
+          <Marquee items={partners} duration={32} />
+
+          <h3 className="network__label">Customers</h3>
+          <Marquee items={customers} reverse duration={36} />
+        </div>
+      </section>
       {/* FINAL CTA */}
       <section className="cta-final">
         <div className="cta-final__bg" aria-hidden="true">

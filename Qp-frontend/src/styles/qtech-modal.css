@@ -1,0 +1,58 @@
+.qmodal__item { height: 100%; }
+.qmodal__card {
+  width: 100%; height: 100%;
+  display: block; text-align: left;
+  font: inherit; color: inherit; cursor: pointer;
+}
+/* the layout animation owns transforms, so hover lift is applied differently */
+.qmodal__card:hover { transform: none; }
+.qmodal__item { transition: transform var(--dur) var(--ease); }
+.qmodal__item:hover { transform: translateY(-6px); }
+.qmodal__hint {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: var(--space-4);
+  font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold);
+}
+
+.qmodal__backdrop {
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; place-items: center;
+  padding: var(--space-5);
+  overflow-y: auto;
+  background:
+    radial-gradient(ellipse at 50% 10%, rgba(79,127,255,0.25), transparent 60%),
+    rgba(4, 6, 11, 0.88);
+  backdrop-filter: blur(10px);
+}
+.qmodal__panel {
+  position: relative;
+  width: min(720px, 100%);
+  padding: clamp(28px, 5vw, 56px);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(212,175,55,0.14), transparent 55%),
+    linear-gradient(160deg, rgba(22,38,78,0.96), rgba(7,11,20,0.98));
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 40px 100px -30px rgba(0,0,0,1), 0 0 80px -30px rgba(212,175,55,0.4);
+}
+.qmodal__icon { width: 56px; height: 56px; border-radius: 16px; }
+.qmodal__panel h3 { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: var(--space-3); }
+.qmodal__lead { font-size: 1.05rem; color: var(--white); margin-bottom: var(--space-4); }
+.qmodal__body { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+
+.qmodal__close {
+  position: absolute; top: 16px; right: 16px;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: var(--white); cursor: pointer;
+  transition: all var(--dur) var(--ease);
+}
+.qmodal__close:hover { border-color: rgba(212,175,55,0.7); color: var(--gold); }
+
+@media (max-width: 560px) {
+  .qmodal__backdrop { padding: var(--space-3); }
+}
