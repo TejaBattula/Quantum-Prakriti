@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -5,16 +6,57 @@ import {
   ArrowRight, Lock, Fingerprint, FileSearch, GitBranch, ScanSearch,
   Puzzle, HeartHandshake, Lightbulb, ShieldAlert
 } from 'lucide-react';
-import QuantumVisual from '../components/QuantumVisual.jsx';
+import QuantumVisual from '../components/QuantumCore.jsx';
 import ServiceCard from '../components/ServiceCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
-import '../styles/home.css'
+import '../styles/home.css';
+
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: '-80px' },
   transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
 };
+
+/* 🎯 Quantum slot — its own QuantumVisual is hidden initially,
+   fades in on the loader's handoff event. */
+function QuantumSlot() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onHandoff = () => {
+      setTimeout(() => setVisible(true), 800);
+    };
+    window.addEventListener('quantum-loader-handoff', onHandoff);
+
+    // Fallback: no loader present (deep-link or refresh on other route)
+    const fallback = setTimeout(() => {
+      if (!document.querySelector('.quantum-loader')) setVisible(true);
+    }, 200);
+
+    return () => {
+      window.removeEventListener('quantum-loader-handoff', onHandoff);
+      clearTimeout(fallback);
+    };
+  }, []);
+
+  return (
+    <div
+      id="quantum-slot"
+      className="hero__visual"
+      style={{ position: 'relative' }}
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+        style={{ width: '100%', height: '100%' }}
+      >
+        <QuantumVisual />
+      </motion.div>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -58,14 +100,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div
-            className="hero__visual"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <QuantumVisual/>
-          </motion.div>
+          <QuantumSlot />
         </div>
       </section>
 
@@ -76,7 +111,7 @@ export default function Home() {
             <span className="eyebrow">Who We Are</span>
             <h2>A technology company built for the quantum era</h2>
             <p>
-              Q-Prakrithi Private Limited is a technology-focused company exploring
+              Q-Prakriti Private Limited is a technology-focused company exploring
               quantum computing, emerging technologies, and quantum-safe cybersecurity.
               We are building capabilities to help organisations prepare for a future
               shaped by quantum innovation.
@@ -117,36 +152,12 @@ export default function Home() {
 
           <div className="grid grid-3 qtech__grid">
             {[
-              {
-                icon: Cpu,
-                title: 'Quantum Computing',
-                desc: 'Uses quantum bits (qubits) which can exist in superpositions, enabling new computational paradigms.'
-              },
-              {
-                icon: Atom,
-                title: 'Qubits & Quantum Circuits',
-                desc: 'Qubits are the fundamental units of quantum information; quantum circuits sequence quantum operations.'
-              },
-              {
-                icon: Sparkles,
-                title: 'Applications',
-                desc: 'Areas under active research include materials science, chemistry simulation, and optimisation problems.'
-              },
-              {
-                icon: GitBranch,
-                title: 'Classical vs Quantum',
-                desc: 'Quantum computers are not universally faster — for many tasks classical computers remain more efficient.'
-              },
-              {
-                icon: Lightbulb,
-                title: 'The Future',
-                desc: 'Continued advances in error correction and hardware will shape real-world quantum usefulness.'
-              },
-              {
-                icon: Puzzle,
-                title: 'Related Technologies',
-                desc: 'Quantum sensing, communication, and networking extend the quantum technology landscape.'
-              },
+              { icon: Cpu, title: 'Quantum Computing', desc: 'Uses quantum bits (qubits) which can exist in superpositions, enabling new computational paradigms.' },
+              { icon: Atom, title: 'Qubits & Quantum Circuits', desc: 'Qubits are the fundamental units of quantum information; quantum circuits sequence quantum operations.' },
+              { icon: Sparkles, title: 'Applications', desc: 'Areas under active research include materials science, chemistry simulation, and optimisation problems.' },
+              { icon: GitBranch, title: 'Classical vs Quantum', desc: 'Quantum computers are not universally faster — for many tasks classical computers remain more efficient.' },
+              { icon: Lightbulb, title: 'The Future', desc: 'Continued advances in error correction and hardware will shape real-world quantum usefulness.' },
+              { icon: Puzzle, title: 'Related Technologies', desc: 'Quantum sensing, communication, and networking extend the quantum technology landscape.' },
             ].map((item, i) => (
               <motion.div
                 key={item.title}
@@ -207,7 +218,7 @@ export default function Home() {
                 <li><ShieldAlert size={16} /> Cryptographic Risk Assessment</li>
               </ul>
               <p className="qs__note">
-                <em>These are technology focus areas. Service availability should be confirmed with Q-Prakrithi directly.</em>
+                <em>These are technology focus areas. Service availability should be confirmed with Q-Prakriti directly.</em>
               </p>
             </motion.aside>
           </div>
@@ -220,7 +231,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="Capabilities"
             title="Proposed service categories"
-            description="Draft categories reflecting our technology direction. Confirm with Q-Prakrithi for final service offerings."
+            description="Draft categories reflecting our technology direction. Confirm with Q-Prakriti for final service offerings."
           />
           <div className="grid grid-3">
             {[
@@ -245,7 +256,7 @@ export default function Home() {
       {/* WHY CHOOSE US */}
       <section className="section section--dark">
         <div className="container">
-          <SectionHeading eyebrow="Why Q-Prakrithi" title="Principles that guide our work" align="center" />
+          <SectionHeading eyebrow="Why Q-Prakriti" title="Principles that guide our work" align="center" />
           <div className="grid grid-3 values">
             {[
               { icon: Lightbulb, title: 'Innovation', desc: 'Curiosity-driven exploration of emerging technologies.' },

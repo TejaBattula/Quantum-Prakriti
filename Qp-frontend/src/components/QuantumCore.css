@@ -1,0 +1,107 @@
+/* ============================================================
+   QUANTUM CORE — hero computer overlays
+   ============================================================ */
+
+.qcore {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  overflow: visible;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  isolation: isolate;
+  touch-action: manipulation;
+}
+.qcore:focus-visible { box-shadow: 0 0 0 2px rgba(64, 223, 255, 0.6); }
+
+.qcore__canvas {
+  position: absolute !important;
+  left: -30%;
+  top: -30%;
+  width: 160% !important;
+  height: 160% !important;
+  z-index: 1;
+  pointer-events: none; /* hover box meeda matrame, bayata buttons block avvavu */
+}
+.qcore__canvas canvas { display: block; outline: none; }
+
+/* ---------- connector lines ---------- */
+.qcore__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  overflow: visible;
+}
+.qcore__line {
+  stroke: rgba(240, 206, 112, 0.7);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.qcore__dot {
+  fill: #f3d681;
+  filter: drop-shadow(0 0 6px rgba(240, 206, 112, 0.9));
+}
+
+/* ---------- labels ---------- */
+.qcore__label {
+  position: absolute;
+  z-index: 3;
+  width: clamp(104px, 22%, 160px);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(5, 10, 26, 0.72);
+  border: 1px solid rgba(240, 206, 112, 0.28);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  will-change: transform, opacity;
+}
+.qcore__label--L { left: 0; text-align: right; border-right: 2px solid rgba(240, 206, 112, 0.8); }
+.qcore__label--R { right: 0; text-align: left; border-left: 2px solid rgba(240, 206, 112, 0.8); }
+.qcore__label strong {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+  color: #f3d681;
+}
+.qcore__label span {
+  font-size: 0.66rem;
+  line-height: 1.35;
+  color: #9fb3cc;
+}
+
+/* ---------- hint ---------- */
+.qcore__hint {
+  position: absolute;
+  z-index: 4;
+  bottom: 16px;
+  right: 16px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 206, 112, 0.3);
+  background: rgba(5, 10, 26, 0.6);
+  pointer-events: none;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f3d681;
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 560px) {
+  .qcore { min-height: 320px; }
+  .qcore__label { width: 96px; padding: 5px 7px; }
+  .qcore__label span { display: none; }
+  .qcore__label strong { font-size: 0.64rem; }
+  .qcore__hint { font-size: 0.56rem; padding: 6px 10px; bottom: 12px; right: 12px; }
+}

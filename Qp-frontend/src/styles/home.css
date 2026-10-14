@@ -324,3 +324,64 @@
   .hero__stats { grid-template-columns: 1fr; }
   .intro__pillars { grid-template-columns: 1fr; }
 }
+/* ===== FIX: give hero__visual + quantum-slot real dimensions ===== */
+.hero__visual {
+  position: relative;
+  width: 100%;
+  min-width: 340px;
+  min-height: 480px;
+  aspect-ratio: 1 / 1.05;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* optional glow */
+  
+}
+
+#quantum-slot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  min-height: 460px;
+}
+
+/* The portaled scene fills the slot exactly */
+.loader-teleported-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.loader-teleported-scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
+
+@media (max-width: 900px) {
+  .hero__visual {
+    max-width: 440px;
+    min-height: 380px;
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+  }
+  #quantum-slot { min-height: 360px; }
+}
+
+@media (max-width: 560px) {
+  .hero__visual {
+    min-height: 320px;
+    
+  }
+  #quantum-slot { min-height: 300px; }
+}
+/* ===== Move the quantum computer up ===== */
+@media (min-width: 901px) {
+  .hero__visual {
+    transform: translateY(-10vh);   /* more up: -14vh, less: -6vh */
+  }
+}

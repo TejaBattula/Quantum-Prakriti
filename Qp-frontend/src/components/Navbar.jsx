@@ -30,7 +30,7 @@ export default function Navbar() {
   return (
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="nav__inner container">
-        <Link to="/" className="nav__brand" aria-label="Q-Prakrithi home">
+        <Link to="/" className="nav__brand" aria-label="Q-Prakriti home">
           <span className="nav__mark">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="3" fill="currentColor"/>
@@ -38,7 +38,7 @@ export default function Navbar() {
               <circle cx="12" cy="12" r="10.5" stroke="currentColor" strokeWidth="1" opacity="0.35"/>
             </svg>
           </span>
-          <span className="nav__word">Q-Prakrithi</span>
+          <span className="nav__word">Q-Prakriti</span>
         </Link>
 
         <nav className="nav__links" aria-label="Primary">
