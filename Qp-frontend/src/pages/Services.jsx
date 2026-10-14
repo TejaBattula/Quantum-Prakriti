@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   ChevronRight, ArrowUpRight, ArrowRight, Download, Lock, CheckCircle2,
@@ -137,7 +137,111 @@ const benchmarks = [
     tone: 'blue',
   },
 ];
+/* ================= FRAMEWORK TIMELINE ================= */
 
+function FrameworkTimeline() {
+  const timelineRef = useRef(null);
+
+  // Track scrolling through the timeline section.
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start 65%', 'end 65%'],
+  });
+
+  // Animate the vertical progress line from top to bottom.
+  const progressHeight = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ['0%', '100%']
+  );
+
+  return (
+    <div className="framework-timeline" ref={timelineRef}>
+      {/* Background timeline track */}
+      <div className="framework-timeline__track" aria-hidden="true" />
+
+      {/* Scroll-responsive progress line */}
+      <motion.div
+        className="framework-timeline__progress"
+        style={{ height: progressHeight }}
+        aria-hidden="true"
+      />
+
+      {framework.map((item, index) => (
+        <div
+          className="framework-timeline__item"
+          key={item.step}
+        >
+          {/* Timeline marker */}
+          <motion.div
+            className="framework-timeline__marker"
+            initial={{ opacity: 0.35, scale: 0.7 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{
+              duration: 0.45,
+              delay: 0.05,
+            }}
+          >
+            <span>{item.step}</span>
+            <span
+              className="framework-timeline__marker-glow"
+              aria-hidden="true"
+            />
+          </motion.div>
+
+          {/* Animated stage card */}
+          <motion.article
+            className="framework-timeline__card"
+            initial={{ opacity: 0, y: 45 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{
+              duration: 0.65,
+              delay: index * 0.06,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <div className="framework-timeline__card-top">
+              <span className="framework-timeline__label">
+                OPERATIONAL PHASE {item.step}
+              </span>
+
+              <span className="framework-timeline__arrow">
+                <ArrowUpRight size={17} />
+              </span>
+            </div>
+
+            <h3 className="framework-timeline__title">
+              {item.title}
+            </h3>
+
+            <p className="framework-timeline__description">
+              {item.desc}
+            </p>
+
+            <div className="framework-timeline__footer">
+              <span className="framework-timeline__status">
+                <CheckCircle2 size={13} />
+                <span>FRAMEWORK CHECKPOINT</span>
+              </span>
+
+              <span className="framework-timeline__technology">
+                {item.time}
+              </span>
+            </div>
+
+            {/* Decorative animated bottom accent */}
+            <div
+              className="framework-timeline__card-accent"
+              aria-hidden="true"
+            />
+          </motion.article>
+        </div>
+      ))}
+    </div>
+  );
+}
 export default function Services() {
   const [active, setActive] = useState('All Solutions');
 
@@ -294,26 +398,7 @@ export default function Services() {
             </p>
           </div>
 
-          <div className="frame-grid">
-            {framework.map((f, i) => (
-              <motion.div
-                key={f.step}
-                className="frame-card"
-                {...fadeUp}
-                transition={{ duration: 0.5, delay: i * 0.07 }}
-              >
-                <div className="frame-card__top">
-                  <span className="frame-card__step">{f.step}</span>
-                  <ArrowRight size={14} />
-                </div>
-                <h4 className="frame-card__title">{f.title}</h4>
-                <p className="frame-card__desc">{f.desc}</p>
-                <div className="frame-card__time">
-                  <CheckCircle2 size={11} /> {f.time}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <FrameworkTimeline />
         </div>
       </section>
 
