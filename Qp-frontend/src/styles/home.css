@@ -378,6 +378,10 @@
     
   }
   #quantum-slot { min-height: 300px; }
+  .container.hero__inner{
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 /* ===== Move the quantum computer up ===== */
 @media (min-width: 901px) {
