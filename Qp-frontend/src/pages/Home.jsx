@@ -9,6 +9,7 @@ import {
 import QuantumVisual from '../components/QuantumCore.jsx';
 import ServiceCard from '../components/ServiceCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
+import PqcSection from '../components/PqcSection.jsx';
 import '../styles/home.css';
 
 const fadeUp = {
@@ -177,53 +178,7 @@ export default function Home() {
       </section>
 
       {/* QUANTUM-SAFE CYBERSECURITY */}
-      <section className="section qs">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Quantum-Safe Cybersecurity"
-            title="Preparing cryptography for a post-quantum world"
-            description="Quantum computing and post-quantum cryptography are related but distinct fields. Post-quantum cryptography refers to cryptographic algorithms designed to remain secure against attacks from both classical and future quantum computers."
-          />
-
-          <div className="qs__layout">
-            <motion.div className="qs__flow" {...fadeUp}>
-              {[
-                { icon: FileSearch, label: 'Cryptographic Discovery', desc: 'Identify where cryptography is used across systems.' },
-                { icon: ShieldAlert, label: 'Quantum Threat Assessment', desc: 'Evaluate exposure to future quantum attacks.' },
-                { icon: Lock, label: 'Post-Quantum Cryptography', desc: 'Adopt PQC algorithms such as ML-KEM, ML-DSA, and SLH-DSA.' },
-                { icon: ShieldCheck, label: 'Quantum-Safe Migration', desc: 'Transition systems to quantum-resistant cryptography.' },
-              ].map((s, i, arr) => (
-                <div className="qs__step" key={s.label}>
-                  <div className="qs__step-marker">
-                    <s.icon size={18} strokeWidth={1.9} />
-                  </div>
-                  <div className="qs__step-body">
-                    <h4>{s.label}</h4>
-                    <p>{s.desc}</p>
-                  </div>
-                  {i < arr.length - 1 && <span className="qs__step-line" aria-hidden="true" />}
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.aside className="qs__side" {...fadeUp}>
-              <h3>Concepts we focus on</h3>
-              <ul className="qs__list">
-                <li><Fingerprint size={16} /> Post-Quantum Cryptography (PQC)</li>
-                <li><Lock size={16} /> ML-KEM — shared-secret establishment</li>
-                <li><Fingerprint size={16} /> ML-DSA — digital signatures</li>
-                <li><Fingerprint size={16} /> SLH-DSA — hash-based digital signatures</li>
-                <li><ScanSearch size={16} /> Cryptographic Bill of Materials (CBOM)</li>
-                <li><ShieldCheck size={16} /> Quantum-Safe Migration</li>
-                <li><ShieldAlert size={16} /> Cryptographic Risk Assessment</li>
-              </ul>
-              <p className="qs__note">
-                <em>These are technology focus areas. Service availability should be confirmed with Q-Prakriti directly.</em>
-              </p>
-            </motion.aside>
-          </div>
-        </div>
-      </section>
+      <PqcSection />
 
       {/* SERVICES PREVIEW */}
       <section className="section section--blue">
