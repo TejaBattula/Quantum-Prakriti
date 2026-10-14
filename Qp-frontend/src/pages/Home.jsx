@@ -11,7 +11,7 @@ import ServiceCard from '../components/ServiceCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import QTechModalCards from '../components/QTModalCards.jsx';
 import StrokeText from '../components/StrokeText.jsx';
-import FlipCard from '../components/FlipCard.jsx';
+import AccordionGallery from '../components/AccordionGallery.jsx';
 import '../styles/home.css';
 const partners = [
   { name: 'Partner One', logo: null },     // logo: '/logos/partner-one.png'
@@ -123,6 +123,40 @@ const qtechCards = [
   { id: 'related', icon: Puzzle, title: 'Related Technologies',
     desc: 'Quantum sensing, communication, and networking extend the quantum technology landscape.',
     details: 'Quantum sensing targets highly precise measurements, quantum communication includes techniques such as quantum key distribution, and quantum networking explores linking quantum devices together.' },
+];
+/* Gradient backgrounds for the panels (swap for real photos any time) */
+const panelBg = (c1, c2) =>
+  `data:image/svg+xml;utf8,${encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='900' height='1200' viewBox='0 0 900 1200'>
+      <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+        <stop offset='0' stop-color='${c1}'/><stop offset='1' stop-color='${c2}'/>
+      </linearGradient></defs>
+      <rect width='900' height='1200' fill='url(#g)'/>
+      <g fill='none' stroke='rgba(212,175,55,0.22)' stroke-width='2'>
+        <circle cx='450' cy='520' r='120'/><circle cx='450' cy='520' r='220'/><circle cx='450' cy='520' r='320'/>
+      </g>
+    </svg>`
+  )}`;
+
+const serviceItems = [
+  { icon: <ShieldCheck size={20} strokeWidth={1.8} />, label: 'Quantum-Safe Security',
+    description: 'Designing and evaluating systems for a post-quantum security posture.',
+    image: panelBg('#0c1630', '#1b3a8a') },
+  { icon: <Lock size={20} strokeWidth={1.8} />, label: 'Post-Quantum Cryptography',
+    description: 'Exploring PQC standards including ML-KEM, ML-DSA, and SLH-DSA.',
+    image: panelBg('#101a3a', '#3b2f7a') },
+  { icon: <ScanSearch size={20} strokeWidth={1.8} />, label: 'Cryptographic Inventory & CBOM',
+    description: 'Structured discovery and documentation of cryptographic assets.',
+    image: panelBg('#0c1630', '#14607a') },
+  { icon: <ShieldAlert size={20} strokeWidth={1.8} />, label: 'Security Assessment',
+    description: 'Reviewing systems for cryptographic risk and quantum-readiness.',
+    image: panelBg('#1a1a2e', '#6b4f12') },
+  { icon: <Cpu size={20} strokeWidth={1.8} />, label: 'Software Development',
+    description: 'Building secure, modern software with a future-ready mindset.',
+    image: panelBg('#0c1630', '#2a4fb0') },
+  { icon: <Atom size={20} strokeWidth={1.8} />, label: 'Emerging Technologies',
+    description: 'Investigating quantum and adjacent technologies for practical impact.',
+    image: panelBg('#12102e', '#5a2f8a') },
 ];
 export default function Home() {
   return (
@@ -248,55 +282,20 @@ export default function Home() {
             title="Proposed service categories"
             description="Draft categories reflecting our technology direction. Confirm with Q-Prakriti for final service offerings."
           />
-          <div className="grid grid-3">
-            {[
-              { icon: ShieldCheck, title: 'Quantum-Safe Security', description: 'Designing and evaluating systems for a post-quantum security posture.' },
-              { icon: Lock, title: 'Post-Quantum Cryptography', description: 'Exploring PQC standards including ML-KEM, ML-DSA, and SLH-DSA.' },
-              { icon: ScanSearch, title: 'Cryptographic Inventory & CBOM', description: 'Structured discovery and documentation of cryptographic assets.' },
-              { icon: ShieldAlert, title: 'Security Assessment', description: 'Reviewing systems for cryptographic risk and quantum-readiness.' },
-              { icon: Cpu, title: 'Software Development', description: 'Building secure, modern software with a future-ready mindset.' },
-              { icon: Atom, title: 'Emerging Technologies', description: 'Investigating quantum and adjacent technologies for practical impact.' },
-            ].map(({ icon: Icon, title, description }, i) => (
-              <motion.div
-                key={title}
-                className="service-flip-wrap"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: i * 0.07 }}
-              >
-                <FlipCard
-                  className="service-flip"
-                  ariaLabel={`${title} – flip for details`}
-                  axis="y"
-                  width={360}
-                  height={240}
-                  radius={18}
-                  background="#0c1630"
-                  color="#f5f5f5"
-                  tilt
-                  tiltMax={8}
-                  glare
-                  glareOpacity={0.18}
-                  hoverScale={1.03}
-                  shadowOpacity={0.4}
-                  front={
-                    <div className="service-flip__face service-flip__face--front">
-                      <Icon size={40} strokeWidth={1.6} />
-                      <h4>{title}</h4>
-                      <span className="service-flip__hint">Click to flip</span>
-                    </div>
-                  }
-                  back={
-                    <div className="service-flip__face service-flip__face--back">
-                      <h4>{title}</h4>
-                      <p>{description}</p>
-                    </div>
-                  }
-                />
-              </motion.div>
-            ))}
-          </div>
+          <AccordionGallery
+            items={serviceItems}
+            defaultIndex={0}
+            expandRatio={0.46}
+            trigger="hover"
+            height={420}
+            gap={10}
+            radius={18}
+            accentColor="#D4AF37"
+            overlayColor="#060b1c"
+            textColor="#ffffff"
+            grayscale={false}
+            tilt={6}
+          />
           <div className="center-cta">
             <Link to="/services" className="btn btn--ghost btn--md">
               View All Services <ArrowRight size={16} className="btn__icon" />
