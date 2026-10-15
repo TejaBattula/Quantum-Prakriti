@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, Atom, ShieldCheck, FlaskConical, Compass, Target,
-  Sparkles, Network, HeartHandshake, Play, FileText,
+  Sparkles, Network, HeartHandshake, Play, FileText, Lightbulb,
 } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading.jsx';
 import '../styles/about.css';
@@ -19,6 +19,22 @@ const heroTelemetry = [
   { label: 'COHERENCE', value: '99.987 QPS' },
   { label: 'SOVEREIGN ARCHITECTURE', value: 'TIER-1' },
 ];
+
+/* Company values — icon + label */
+const companyValues = [
+  { label: 'Innovation', icon: Lightbulb },
+  { label: 'Security', icon: ShieldCheck },
+  { label: 'Responsible Technology', icon: HeartHandshake },
+  { label: 'Research-Driven Thinking', icon: FlaskConical },
+  { label: 'Future-Ready Solutions', icon: Network },
+];
+
+/* Cursor-follow spotlight: writes mouse position into CSS variables */
+const trackSpotlight = (e) => {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`);
+};
 
 export default function About() {
   return (
@@ -201,22 +217,38 @@ export default function About() {
         </div>
       </section>
 
-      {/* ============ VALUES ============ */}
-      <section className="section section--blue">
+      {/* ============ VALUES (animated) ============ */}
+      <section className="section section--blue values-section">
+        {/* orbiting rings behind the chips */}
+        <div className="values-orbits" aria-hidden="true">
+          <span className="values-orbit values-orbit--1" />
+          <span className="values-orbit values-orbit--2" />
+          <span className="values-orbit values-orbit--3" />
+        </div>
+
         <div className="container">
           <SectionHeading eyebrow="Company Values" title="What we stand for" align="center" />
           <div className="values-row">
-            {['Innovation', 'Security', 'Responsible Technology', 'Research-Driven Thinking', 'Future-Ready Solutions'].map((v, i) => (
-              <motion.span
-                key={v}
-                className="value-chip"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
+            {companyValues.map(({ label, icon: Icon }, i) => (
+              <div
+                className="value-item"
+                key={label}
+                style={{ animationDelay: `${i * 0.7}s` }}
               >
-                {v}
-              </motion.span>
+                <motion.span
+                  className="value-chip"
+                  initial={{ opacity: 0, y: 28, scale: 0.85, filter: 'blur(6px)' }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ type: 'spring', stiffness: 120, damping: 14, delay: i * 0.09 }}
+                  whileHover={{ y: -5, scale: 1.05 }}
+                  onMouseMove={trackSpotlight}
+                >
+                  <span className="value-chip__num">0{i + 1}</span>
+                  <span className="value-chip__icon"><Icon size={16} strokeWidth={1.8} /></span>
+                  <span className="value-chip__text">{label}</span>
+                </motion.span>
+              </div>
             ))}
           </div>
         </div>

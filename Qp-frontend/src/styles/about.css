@@ -321,3 +321,144 @@
   border-color: var(--gold);
   box-shadow: 0 12px 30px -10px rgba(212, 175, 55, 0.35);
 }
+
+/* ================= VALUES — ANIMATED ("What we stand for") ================= */
+@property --ang {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.values-section { position: relative; overflow: hidden; }
+.values-section .container { position: relative; z-index: 1; }
+
+/* orbiting rings behind the chips */
+.values-orbits {
+  position: absolute;
+  left: 50%; top: 62%;
+  width: min(980px, 130vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle, black 35%, transparent 70%);
+          mask-image: radial-gradient(circle, black 35%, transparent 70%);
+}
+.values-orbit {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 175, 55, 0.22);
+  animation: orbitSpin 46s linear infinite;
+}
+.values-orbit::before {
+  content: '';
+  position: absolute; top: -4px; left: 50%;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 16px 2px var(--gold);
+}
+.values-orbit--2 {
+  inset: 14%;
+  border: 1px solid rgba(79, 127, 255, 0.22);
+  animation-duration: 32s;
+  animation-direction: reverse;
+}
+.values-orbit--2::before { background: #6f97ff; box-shadow: 0 0 16px 2px #4f7fff; }
+.values-orbit--3 {
+  inset: 30%;
+  animation-duration: 22s;
+}
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* chips */
+.values-row { position: relative; z-index: 1; gap: 18px; padding-top: 8px; }
+
+.value-item { animation: valueFloat 6s ease-in-out infinite; }
+@keyframes valueFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+.value-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 26px 13px 18px;
+  overflow: hidden;
+  cursor: default;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(140deg, rgba(212, 175, 55, 0.1), rgba(15, 30, 66, 0.55));
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.value-chip > * { position: relative; z-index: 1; }
+
+/* cursor-follow spotlight */
+.value-chip::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(130px circle at var(--mx, 50%) var(--my, 50%), rgba(212, 175, 55, 0.3), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.value-chip:hover::before { opacity: 1; }
+
+/* rotating gold border sweep */
+.value-chip::after {
+  content: '';
+  position: absolute; inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--ang), transparent 0 62%, #d4af37 82%, #fff0b8 90%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  animation: angSpin 2.6s linear infinite;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.value-chip:hover::after { opacity: 1; }
+@keyframes angSpin { to { --ang: 360deg; } }
+
+.value-chip__num {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.value-chip__icon {
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: var(--gold);
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  transition: transform 0.5s var(--ease), background 0.3s ease, color 0.3s ease;
+}
+.value-chip:hover .value-chip__icon {
+  transform: rotate(360deg) scale(1.1);
+  background: var(--gold);
+  color: #1a1305;
+}
+.value-chip__text { font-size: 0.92rem; font-weight: 500; }
+
+[data-theme="light"] .values-orbit { border-color: rgba(168, 134, 42, 0.3); }
+[data-theme="light"] .values-orbit--2 { border-color: rgba(168, 134, 42, 0.2); }
+[data-theme="light"] .value-chip {
+  background: linear-gradient(140deg, rgba(255, 254, 250, 0.9), rgba(255, 248, 230, 0.9));
+}
+[data-theme="light"] .value-chip__text { color: #1a1305; }
+
+@media (max-width: 560px) {
+  .value-item { animation-duration: 8s; }
+  .value-chip { padding: 11px 20px 11px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .values-orbit, .value-item, .value-chip::after { animation: none; }
+}
