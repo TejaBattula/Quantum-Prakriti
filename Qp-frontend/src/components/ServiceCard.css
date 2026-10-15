@@ -33,3 +33,17 @@
     transition: all var(--dur) var(--ease);
   }
   .svc-card:hover .svc-card__arrow { color: var(--gold); transform: translate(3px, -3px); }
+
+  /* ===== LIGHT THEME SERVICE CARD — SOLAR IVORY ===== */
+  [data-theme="light"] .svc-card {
+    background: linear-gradient(160deg, rgba(255, 254, 250, 0.85), rgba(255, 252, 244, 0.95));
+    border-color: rgba(180, 155, 70, 0.18);
+  }
+  [data-theme="light"] .svc-card:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 12px 32px -10px rgba(130, 100, 30, 0.14);
+  }
+  [data-theme="light"] .svc-card__icon {
+    background: rgba(212, 175, 55, 0.08);
+    border-color: rgba(212, 175, 55, 0.3);
+  }

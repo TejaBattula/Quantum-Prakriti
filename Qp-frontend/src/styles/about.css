@@ -259,3 +259,65 @@
 @media (max-width: 560px) {
   .ahero__telemetry { flex-direction: column; align-items: center; gap: 10px; }
 }
+
+/* ===== LIGHT THEME ABOUT — SOLAR IVORY ===== */
+[data-theme="light"] .ahero {
+  background:
+    radial-gradient(1100px 560px at 50% 0%, rgba(212, 175, 55, 0.09) 0%, transparent 62%),
+    radial-gradient(900px 480px at 88% 40%, rgba(168, 134, 42, 0.07) 0%, transparent 65%),
+    radial-gradient(700px 700px at 50% 115%, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+    linear-gradient(180deg, #FAF8F3 0%, #F2EDE2 55%, #FAF8F3 100%);
+}
+[data-theme="light"] .ahero__glow--blue {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 70%);
+}
+[data-theme="light"] .ahero__glow--gold {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 70%);
+}
+[data-theme="light"] .ahero__pill {
+  background: rgba(255, 253, 248, 0.88);
+  border-color: rgba(212, 175, 55, 0.45);
+}
+[data-theme="light"] .about-visual { opacity: 0.9; }
+
+/* Page hero */
+[data-theme="light"] .page-hero {
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(212, 175, 55, 0.1), transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(168, 134, 42, 0.06), transparent 60%),
+    var(--grad-section);
+  border-bottom-color: rgba(212, 175, 55, 0.18);
+}
+[data-theme="light"] .page-hero::after {
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.45), transparent);
+}
+
+/* About cards */
+[data-theme="light"] .about-card {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.88), rgba(255, 252, 244, 0.96));
+  border-color: rgba(212, 175, 55, 0.22);
+  box-shadow: 0 8px 32px -8px rgba(130, 100, 30, 0.1);
+}
+[data-theme="light"] .about-card::before {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 70%);
+}
+
+/* About tiles */
+[data-theme="light"] .about-tile {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.82), rgba(255, 252, 244, 0.92));
+  border-color: rgba(180, 155, 70, 0.18);
+}
+[data-theme="light"] .about-tile:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 16px 40px -20px rgba(130, 100, 30, 0.16);
+}
+
+/* Value chips */
+[data-theme="light"] .value-chip {
+  background: linear-gradient(140deg, rgba(212, 175, 55, 0.06), rgba(168, 134, 42, 0.04));
+  border-color: rgba(212, 175, 55, 0.32);
+}
+[data-theme="light"] .value-chip:hover {
+  border-color: var(--gold);
+  box-shadow: 0 12px 30px -10px rgba(212, 175, 55, 0.35);
+}

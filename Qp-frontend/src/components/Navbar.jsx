@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Atom, Globe, Languages } from 'lucide-react';
+import { Menu, X, Globe, Languages } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 import './Navbar.css';
 import qprakritimark from  "./q-prakriti-mark.png"
 const links = [
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -56,6 +58,20 @@ export default function Navbar() {
           </button>
           <button className="nav__icon-btn" aria-label="Region">
             <Globe size={16} />
+          </button>
+
+          {/* Theme toggle pill */}
+          <button
+            className="nav__theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            data-active={theme}
+          >
+            <div className="nav__theme-toggle__track">
+              <span className="nav__theme-toggle__icon" aria-hidden>🌙</span>
+              <span className="nav__theme-toggle__icon" aria-hidden>☀️</span>
+            </div>
+            <span className="nav__theme-toggle__knob" />
           </button>
 
           <Link to="/contact" className="nav__portal">Client Portal</Link>

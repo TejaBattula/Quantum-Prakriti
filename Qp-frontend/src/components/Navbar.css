@@ -153,3 +153,92 @@
   .nav__toggle { display: block; }
   .nav__mobile { display: block; }
 }
+
+/* ===== THEME TOGGLE BUTTON ===== */
+.nav__theme-toggle {
+  width: 66px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  position: relative;
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  flex-shrink: 0;
+}
+.nav__theme-toggle:hover {
+  border-color: rgba(212, 175, 55, 0.7);
+  background: rgba(255, 255, 255, 0.1);
+}
+.nav__theme-toggle__track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4px;
+  pointer-events: none;
+}
+.nav__theme-toggle__icon {
+  font-size: 13px;
+  line-height: 1;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+.nav__theme-toggle__knob {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--grad-gold);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.55);
+  transition: transform var(--dur-fast) var(--ease);
+  left: 4px;
+}
+.nav__theme-toggle[data-active="light"] .nav__theme-toggle__knob {
+  transform: translateX(34px);
+}
+
+/* ===== LIGHT THEME NAVBAR — SOLAR IVORY ===== */
+[data-theme="light"] .nav {
+  background: rgba(250, 248, 243, 0.84);
+  border-bottom-color: rgba(180, 155, 70, 0.18);
+}
+[data-theme="light"] .nav--scrolled {
+  background: rgba(250, 248, 243, 0.97);
+  border-bottom-color: rgba(212, 175, 55, 0.28);
+  box-shadow: 0 8px 32px -12px rgba(130, 100, 30, 0.16);
+}
+[data-theme="light"] .nav__brand { color: var(--white); }
+[data-theme="light"] .nav__link { color: var(--text-secondary); }
+[data-theme="light"] .nav__link:hover { color: var(--white); }
+[data-theme="light"] .nav__icon-btn { color: var(--text-muted); }
+[data-theme="light"] .nav__portal {
+  color: var(--white);
+  background: rgba(212, 175, 55, 0.08);
+  border-color: rgba(180, 155, 70, 0.38);
+}
+[data-theme="light"] .nav__portal:hover {
+  background: rgba(212, 175, 55, 0.14);
+  border-color: rgba(212, 175, 55, 0.65);
+  color: var(--white);
+}
+[data-theme="light"] .nav__toggle { color: var(--white); }
+[data-theme="light"] .nav__mobile {
+  background: rgba(250, 248, 243, 0.99);
+  border-top-color: rgba(212, 175, 55, 0.2);
+}
+[data-theme="light"] .nav__mobile-link {
+  color: var(--text-secondary);
+  border-bottom-color: rgba(130, 100, 30, 0.1);
+}
+[data-theme="light"] .nav__mobile-link.is-active { color: var(--gold-deep); }
+[data-theme="light"] .nav__theme-toggle {
+  border-color: rgba(180, 155, 70, 0.45);
+  background: rgba(255, 253, 248, 0.7);
+}
+[data-theme="light"] .nav__theme-toggle:hover {
+  border-color: rgba(212, 175, 55, 0.7);
+  background: rgba(212, 175, 55, 0.1);
+}

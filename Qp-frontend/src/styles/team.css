@@ -56,3 +56,19 @@
 }
 .team-card__bio { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: var(--space-4); }
 .team-card__socials { display: flex; gap: 10px; justify-content: center; color: var(--text-muted); }
+
+/* ===== LIGHT THEME TEAM — SOLAR IVORY ===== */
+[data-theme="light"] .team-card {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.85), rgba(255, 252, 244, 0.95));
+  border-color: rgba(180, 155, 70, 0.18);
+  box-shadow: 0 8px 28px -8px rgba(130, 100, 30, 0.08);
+}
+[data-theme="light"] .team-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 16px 48px -12px rgba(130, 100, 30, 0.16), 0 0 30px -15px rgba(212, 175, 55, 0.15);
+}
+[data-theme="light"] .team-card__avatar {
+  background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.25), rgba(255, 253, 248, 0.9));
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.08), 0 12px 30px -12px rgba(212, 175, 55, 0.4);
+}
+[data-theme="light"] .team-card__socials { color: var(--text-muted); }

@@ -89,3 +89,36 @@
   .contact-grid { grid-template-columns: 1fr; }
   .contact-form__row { grid-template-columns: 1fr; }
 }
+
+/* ===== LIGHT THEME CONTACT — SOLAR IVORY ===== */
+[data-theme="light"] .contact-info__list li {
+  background: linear-gradient(160deg, rgba(255,254,250,0.82), rgba(255,252,244,0.92));
+  border-color: rgba(180,155,70,0.2);
+}
+[data-theme="light"] .contact-info__list li:hover { border-color: rgba(212,175,55,0.5); }
+[data-theme="light"] .contact-info__list strong { color: var(--white); }
+[data-theme="light"] .contact-socials a {
+  border-color: rgba(180,155,70,0.3);
+  color: var(--text-muted);
+}
+[data-theme="light"] .contact-form {
+  background: linear-gradient(160deg, rgba(255,254,250,0.88), rgba(255,252,244,0.96));
+  border-color: rgba(180,155,70,0.22);
+  box-shadow: 0 8px 32px -8px rgba(130,100,30,0.1);
+}
+[data-theme="light"] .field input,
+[data-theme="light"] .field textarea {
+  background: rgba(255, 253, 248, 0.9);
+  border-color: rgba(180,155,70,0.28);
+  color: var(--white);
+}
+[data-theme="light"] .field input::placeholder,
+[data-theme="light"] .field textarea::placeholder {
+  color: var(--text-muted);
+}
+[data-theme="light"] .field input:focus,
+[data-theme="light"] .field textarea:focus {
+  background: rgba(255, 255, 255, 1);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.12);
+}

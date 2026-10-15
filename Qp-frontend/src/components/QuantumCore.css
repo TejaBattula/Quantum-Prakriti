@@ -105,3 +105,24 @@
   .qcore__label strong { font-size: 0.64rem; }
   .qcore__hint { font-size: 0.56rem; padding: 6px 10px; bottom: 12px; right: 12px; }
 }
+
+/* ===== LIGHT THEME QUANTUM CORE — SOLAR IVORY ===== */
+[data-theme="light"] .qcore__label {
+  background: rgba(255, 253, 248, 0.88);
+  border-color: rgba(212, 175, 55, 0.35);
+  backdrop-filter: blur(8px);
+}
+[data-theme="light"] .qcore__label--L { border-right-color: rgba(212, 175, 55, 0.7); }
+[data-theme="light"] .qcore__label--R { border-left-color: rgba(212, 175, 55, 0.7); }
+[data-theme="light"] .qcore__label strong { color: var(--gold-deep); }
+[data-theme="light"] .qcore__label span { color: var(--text-muted); }
+[data-theme="light"] .qcore__hint {
+  background: rgba(255, 253, 248, 0.78);
+  border-color: rgba(212, 175, 55, 0.35);
+  color: var(--gold-deep);
+}
+[data-theme="light"] .qcore__line { stroke: rgba(212, 175, 55, 0.5); }
+[data-theme="light"] .qcore__dot {
+  fill: var(--gold);
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.6));
+}

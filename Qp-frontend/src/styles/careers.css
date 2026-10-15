@@ -1296,3 +1296,267 @@
 .apply-button:hover {
   background: #d6eeff;
 }
+/* ===== LIGHT THEME CAREERS — SOLAR IVORY ===== */
+[data-theme="light"] .careers-dash { background: var(--black); }
+
+/* Hero */
+[data-theme="light"] .chero {
+  background:
+    radial-gradient(1100px 560px at 12% 12%, rgba(212, 175, 55, 0.09) 0%, transparent 62%),
+    radial-gradient(900px 480px at 88% 25%, rgba(168, 134, 42, 0.06) 0%, transparent 65%),
+    radial-gradient(700px 700px at 50% 110%, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
+    linear-gradient(180deg, #FAF8F3 0%, #F2EDE2 60%, #FAF8F3 100%);
+}
+[data-theme="light"] .chero__glow--blue {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 70%);
+}
+[data-theme="light"] .chero__glow--gold {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 70%);
+}
+[data-theme="light"] .chero__pill {
+  background: rgba(255, 253, 248, 0.88);
+  border-color: rgba(212, 175, 55, 0.45);
+}
+
+/* Telemetry card */
+[data-theme="light"] .chero__telemetry {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.88), rgba(255, 252, 244, 0.96));
+  border-color: rgba(180, 155, 70, 0.22);
+  box-shadow:
+    0 12px 36px -12px rgba(130, 100, 30, 0.12),
+    0 0 0 1px rgba(212, 175, 55, 0.08) inset;
+}
+[data-theme="light"] .tele__head {
+  border-bottom-color: rgba(180, 155, 70, 0.12);
+  background: rgba(255, 253, 248, 0.7);
+}
+[data-theme="light"] .tele__row {
+  border-bottom-color: rgba(180, 155, 70, 0.08);
+}
+[data-theme="light"] .tele__live {
+  color: #2a8a55;
+  background: rgba(60, 180, 120, 0.06);
+  border-color: rgba(60, 180, 120, 0.25);
+}
+[data-theme="light"] .tele__footer {
+  border-top-color: rgba(180, 155, 70, 0.12);
+  background: rgba(255, 253, 248, 0.6);
+}
+
+/* Section wrapper */
+[data-theme="light"] .dash-section--journey {
+  border-top-color: rgba(180, 155, 70, 0.12);
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(212, 175, 55, 0.05), transparent 60%),
+    radial-gradient(ellipse at 90% 20%, rgba(168, 134, 42, 0.04), transparent 55%);
+}
+
+/* Filters */
+[data-theme="light"] .dash-filters {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.85), rgba(255, 252, 244, 0.92));
+  border-color: rgba(180, 155, 70, 0.18);
+}
+[data-theme="light"] .dash-filter__btn {
+  background: rgba(255, 253, 248, 0.9);
+  border-color: rgba(212, 175, 55, 0.28);
+}
+[data-theme="light"] .dash-filter__btn:hover {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.06);
+}
+[data-theme="light"] .dash-filter__menu {
+  background: rgba(255, 253, 248, 0.98);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 12px 32px -10px rgba(130, 100, 30, 0.18);
+}
+[data-theme="light"] .dash-filter__menu button:hover {
+  background: rgba(212, 175, 55, 0.08);
+}
+
+/* Job rows */
+[data-theme="light"] .job-row {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.85), rgba(255, 252, 244, 0.95));
+  border-color: rgba(180, 155, 70, 0.18);
+}
+[data-theme="light"] .job-row::before {
+  background: linear-gradient(120deg, transparent 40%, rgba(212, 175, 55, 0.06) 55%, transparent 70%);
+}
+[data-theme="light"] .job-row:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 16px 40px -20px rgba(130, 100, 30, 0.18);
+}
+[data-theme="light"] .job-row__side {
+  border-left-color: rgba(180, 155, 70, 0.12);
+}
+[data-theme="light"] .job-empty {
+  border-color: rgba(180, 155, 70, 0.18);
+}
+
+/* Tags */
+[data-theme="light"] .tag {
+  background: rgba(130, 100, 30, 0.04);
+  border-color: rgba(180, 155, 70, 0.18);
+}
+[data-theme="light"] .tag--dept {
+  background: rgba(79, 127, 255, 0.08);
+  border-color: rgba(79, 127, 255, 0.25);
+  color: #4a6ec0;
+}
+[data-theme="light"] .tag--urgent {
+  background: rgba(255, 60, 60, 0.06);
+  border-color: rgba(255, 60, 60, 0.25);
+  color: #c03030;
+}
+
+/* Journey cards */
+[data-theme="light"] .journey-card {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.85), rgba(255, 252, 244, 0.95));
+  border-color: rgba(180, 155, 70, 0.18);
+}
+[data-theme="light"] .journey-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+[data-theme="light"] .journey-card.is-featured {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.1), transparent 65%),
+    linear-gradient(160deg, rgba(255, 253, 248, 0.92), rgba(255, 252, 244, 0.98));
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 0 30px -8px rgba(212, 175, 55, 0.2);
+}
+[data-theme="light"] .journey-card__time {
+  border-top-color: rgba(180, 155, 70, 0.12);
+}
+[data-theme="light"] .journey-card__icon {
+  border-color: rgba(180, 155, 70, 0.2);
+}
+
+/* Inquiry */
+[data-theme="light"] .inquiry {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.88), rgba(255, 252, 244, 0.96));
+  border-color: rgba(180, 155, 70, 0.2);
+}
+
+/* Expandable job cards */
+[data-theme="light"] .expandable-job-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 254, 250, 0.88),
+      rgba(255, 252, 244, 0.96)
+    );
+  border-color: rgba(180, 155, 70, 0.2);
+}
+[data-theme="light"] .expandable-job-card::before {
+  background: linear-gradient(
+    115deg,
+    transparent 25%,
+    rgba(212, 175, 55, 0.06) 50%,
+    transparent 75%
+  );
+}
+[data-theme="light"] .expandable-job-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 253, 248, 1)
+    );
+  box-shadow:
+    0 12px 32px -15px rgba(130, 100, 30, 0.16),
+    0 0 20px -12px rgba(212, 175, 55, 0.2);
+}
+[data-theme="light"] .expandable-job-card__side {
+  border-left-color: rgba(180, 155, 70, 0.14);
+}
+
+/* Expanded modal */
+[data-theme="light"] .expandable-jobs__backdrop {
+  background: rgba(250, 248, 243, 0.72);
+}
+[data-theme="light"] .expanded-job {
+  background:
+    radial-gradient(
+      ellipse at 0% 0%,
+      rgba(212, 175, 55, 0.08),
+      transparent 48%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(168, 134, 42, 0.05),
+      transparent 45%
+    ),
+    linear-gradient(
+      150deg,
+      #FFFEFA 0%,
+      #FAF8F3 65%,
+      #F7F2E8 100%
+    );
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow:
+    0 30px 80px rgba(130, 100, 30, 0.15),
+    0 0 40px rgba(212, 175, 55, 0.06);
+}
+[data-theme="light"] .expanded-job::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.4);
+}
+[data-theme="light"] .expanded-job__top {
+  border-bottom-color: rgba(180, 155, 70, 0.12);
+  background: rgba(255, 253, 248, 0.5);
+}
+[data-theme="light"] .expanded-job__close {
+  background: rgba(130, 100, 30, 0.05);
+  border-color: rgba(180, 155, 70, 0.2);
+}
+[data-theme="light"] .expanded-job__close:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.45);
+}
+[data-theme="light"] .expanded-job__status {
+  color: #2a8a55;
+}
+[data-theme="light"] .expanded-job__status > span {
+  background: #2a8a55;
+  box-shadow: 0 0 10px rgba(42, 138, 85, 0.5);
+}
+[data-theme="light"] .expanded-job__details {
+  background: rgba(130, 100, 30, 0.03);
+  border-color: rgba(180, 155, 70, 0.14);
+}
+[data-theme="light"] .expanded-job__detail:nth-child(odd) {
+  border-right-color: rgba(180, 155, 70, 0.1);
+}
+[data-theme="light"] .expanded-job__detail:nth-child(n + 3) {
+  border-top-color: rgba(180, 155, 70, 0.1);
+}
+[data-theme="light"] .expanded-job__footer {
+  border-top-color: rgba(180, 155, 70, 0.12);
+}
+
+/* Legacy job-card (simple) */
+[data-theme="light"] .careers-page { background: var(--black); }
+[data-theme="light"] .job-card {
+  background: linear-gradient(160deg, rgba(255, 254, 250, 0.85), rgba(255, 252, 244, 0.95));
+  border-color: rgba(180, 155, 70, 0.18);
+}
+[data-theme="light"] .job-card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: 0 12px 36px -10px rgba(130, 100, 30, 0.14);
+}
+[data-theme="light"] .filter-btn {
+  background: rgba(255, 253, 248, 0.85);
+  border-color: rgba(180, 155, 70, 0.22);
+  color: var(--white);
+}
+[data-theme="light"] .filter-btn.active,
+[data-theme="light"] .filter-btn:hover {
+  background: var(--grad-gold);
+  color: #1a1305;
+  border-color: transparent;
+}
+[data-theme="light"] .careers-hero {
+  background:
+    radial-gradient(1200px 600px at 50% 0%, rgba(212, 175, 55, 0.08) 0%, transparent 62%),
+    linear-gradient(180deg, #FAF8F3 0%, #F2EDE2 55%, #FAF8F3 100%);
+}
+

@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
@@ -89,7 +90,7 @@ export default function App() {
   }, [isLoading]);
 
   return (
-    <>
+    <ThemeProvider>
       {/* Cinematic opening animation — overlays everything */}
       <AnimatePresence>
         {isLoading && (
@@ -173,6 +174,6 @@ export default function App() {
       </AnimatePresence>
 
       <Footer />
-    </>
+    </ThemeProvider>
   );
 }

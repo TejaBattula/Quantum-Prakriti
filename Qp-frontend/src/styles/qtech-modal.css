@@ -56,3 +56,30 @@
 @media (max-width: 560px) {
   .qmodal__backdrop { padding: var(--space-3); }
 }
+
+/* ===== LIGHT THEME QTECH MODAL — SOLAR IVORY ===== */
+[data-theme="light"] .qmodal__backdrop {
+  background:
+    radial-gradient(ellipse at 50% 10%, rgba(212, 175, 55, 0.12), transparent 60%),
+    rgba(250, 248, 243, 0.85);
+}
+[data-theme="light"] .qmodal__panel {
+  background:
+    radial-gradient(circle at 100% 0%, rgba(212, 175, 55, 0.1), transparent 55%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(255, 253, 248, 0.98));
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 30px 80px -20px rgba(130, 100, 30, 0.2), 0 0 50px -20px rgba(212, 175, 55, 0.25);
+}
+[data-theme="light"] .qmodal__close {
+  background: rgba(130, 100, 30, 0.05);
+  border-color: rgba(180, 155, 70, 0.2);
+  color: var(--white);
+}
+[data-theme="light"] .qmodal__close:hover {
+  border-color: rgba(212, 175, 55, 0.55);
+  background: rgba(212, 175, 55, 0.1);
+}
+[data-theme="light"] .qmodal__icon {
+  background: linear-gradient(150deg, rgba(212, 175, 55, 0.12), rgba(168, 134, 42, 0.06));
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}

@@ -81,3 +81,34 @@
 
 @media (max-width: 900px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .footer__grid { grid-template-columns: 1fr; gap: var(--space-6); } }
+
+/* ===== LIGHT THEME FOOTER — SOLAR IVORY ===== */
+[data-theme="light"] .footer {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.1), transparent 60%),
+    #F2EDE2;
+  border-top-color: rgba(212, 175, 55, 0.25);
+  color: var(--text-secondary);
+}
+[data-theme="light"] .footer::before {
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.55), transparent);
+}
+[data-theme="light"] .footer__brand { color: var(--white); }
+[data-theme="light"] .footer__mark {
+  border-color: rgba(212, 175, 55, 0.55);
+  background: radial-gradient(circle at 30% 30%, rgba(212,175,55,0.18), transparent 70%);
+}
+[data-theme="light"] .footer__heading { color: var(--white); }
+[data-theme="light"] .footer__base {
+  border-top-color: rgba(130, 100, 30, 0.12);
+  color: var(--text-muted);
+}
+[data-theme="light"] .footer__socials a {
+  border-color: rgba(180, 155, 70, 0.3);
+  color: var(--text-muted);
+}
+[data-theme="light"] .footer__socials a:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 10px 25px -10px rgba(212,175,55,0.5);
+}
