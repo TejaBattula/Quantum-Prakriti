@@ -250,22 +250,22 @@ img, svg { max-width: 100%; display: block; }
 ::-webkit-scrollbar-thumb:hover { background: var(--burgundy); }
 ::selection { background: rgba(212, 175, 55, 0.3); color: var(--white); }
 
-/* ===== LIGHT THEME GLOBAL OVERRIDES — SOLAR IVORY ===== */
+/* ===== LIGHT THEME GLOBAL OVERRIDES — REFINED IVORY ===== */
 [data-theme="light"] body {
-  background: var(--black);   /* #FAF8F3 warm cream */
+  background: var(--black);   /* #F8F7F2 soft ivory */
   color: var(--text-secondary);
 }
 
-/* Body ambient field — warm gold dust particles */
+/* Body ambient field — subtle gold + blue dust particles */
 [data-theme="light"] body::before {
   background-image:
-    radial-gradient(1px 1px at 20% 30%, rgba(212,175,55,0.30) 0, transparent 60%),
-    radial-gradient(1px 1px at 70% 15%, rgba(180,140,40,0.22) 0, transparent 60%),
-    radial-gradient(1px 1px at 40% 80%, rgba(212,175,55,0.20) 0, transparent 60%),
-    radial-gradient(1px 1px at 85% 65%, rgba(168,134,42,0.18) 0, transparent 60%),
-    radial-gradient(1px 1px at 10% 60%, rgba(100,80,20,0.12) 0, transparent 60%),
-    radial-gradient(1px 1px at 55% 45%, rgba(100,80,20,0.10) 0, transparent 60%);
-  opacity: 0.7;
+    radial-gradient(1px 1px at 20% 30%, rgba(201,162,39,0.25) 0, transparent 60%),
+    radial-gradient(1px 1px at 70% 15%, rgba(140,184,232,0.22) 0, transparent 60%),
+    radial-gradient(1px 1px at 40% 80%, rgba(201,162,39,0.18) 0, transparent 60%),
+    radial-gradient(1px 1px at 85% 65%, rgba(140,184,232,0.18) 0, transparent 60%),
+    radial-gradient(1px 1px at 10% 60%, rgba(100,80,20,0.10) 0, transparent 60%),
+    radial-gradient(1px 1px at 55% 45%, rgba(100,80,20,0.08) 0, transparent 60%);
+  opacity: 0.6;
 }
 
 [data-theme="light"] h1,
@@ -273,34 +273,37 @@ img, svg { max-width: 100%; display: block; }
 [data-theme="light"] h3,
 [data-theme="light"] h4,
 [data-theme="light"] h5 {
-  color: var(--white);   /* slate navy #1A2038 */
+  color: var(--white);   /* deep navy #101828 */
 }
 
-/* Scrollbar — warm sand tones */
-[data-theme="light"] ::-webkit-scrollbar-track { background: #F2EDE2; }
-[data-theme="light"] ::-webkit-scrollbar-thumb { background: #C8B88A; border-radius: 8px; }
-[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: var(--gold-deep); }
+/* Scrollbar — warm tones */
+[data-theme="light"] ::-webkit-scrollbar-track { background: #F0EFE9; }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: #E5E0D5; border-radius: 8px; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* Selection */
+[data-theme="light"] ::selection { background: rgba(201, 162, 39, 0.25); color: var(--white); }
 
 /* Ghost button — ivory with gold border on hover */
 [data-theme="light"] .btn--ghost {
-  background: rgba(255, 253, 248, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   color: var(--white);
-  border-color: rgba(130, 100, 30, 0.22);
+  border-color: rgba(229, 224, 213, 0.8);
 }
 [data-theme="light"] .btn--ghost:hover {
   border-color: var(--gold);
   color: var(--gold-deep);
-  background: rgba(212, 175, 55, 0.08);
+  background: rgba(201, 162, 39, 0.08);
 }
 
-/* Service card — ivory surface with gold-tinted border */
+/* Service card — white surface with warm gray border */
 [data-theme="light"] .svc-card {
-  background: linear-gradient(160deg, rgba(255,254,250,0.88) 0%, rgba(255,252,244,0.95) 100%);
-  border-color: rgba(180, 155, 70, 0.22);
-  box-shadow: 0 6px 28px -8px rgba(130,100,30,0.1), 0 0 0 1px rgba(180,155,70,0.16) inset;
+  background: linear-gradient(160deg, rgba(255,255,255,0.92) 0%, rgba(248,247,242,0.95) 100%);
+  border-color: rgba(229, 224, 213, 0.9);
+  box-shadow: 0 6px 28px -8px rgba(130,100,30,0.08), 0 0 0 1px rgba(229,224,213,0.6) inset;
 }
 [data-theme="light"] .svc-card:hover {
-  border-color: rgba(212,175,55,0.55);
+  border-color: rgba(201,162,39,0.55);
   background: var(--grad-card-hover);
   box-shadow: var(--shadow-card-hover);
 }

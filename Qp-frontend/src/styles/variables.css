@@ -61,19 +61,24 @@
   --grid-line: rgba(79, 127, 255, 0.055);
 }
 
-/* ===== LIGHT THEME — SOLAR IVORY ===== */
+/* ===== LIGHT THEME — REFINED IVORY ===== */
 [data-theme="light"] {
-  /* Base surfaces — warm cream/ivory */
-  --black:      #FAF8F3;   /* page background — warm cream        */
-  --black-2:    #F2EDE2;   /* section alternate — light sand       */
-  --deep-blue:  #EDE8DC;   /* component tint — muted sand         */
-  --deep-blue-2:#E3DAC8;   /* card surface — antique ivory        */
-  --deep-blue-3:#D6CAB4;   /* deeper warm tone                    */
+  /* Base surfaces */
+  --black:      #F8F7F2;   /* page background — soft ivory         */
+  --black-2:    #FFFFFF;   /* section alternate — cool white       */
+  --deep-blue:  #F0EFE9;   /* component tint — light warm          */
+  --deep-blue-2:#E5E0D5;   /* card surface — warm gray             */
+  --deep-blue-3:#D8D3C8;   /* deeper warm tone                     */
 
-  /* Text — slate navy family */
-  --white:          #1A2038;   /* primary text — slate navy           */
-  --text-secondary: #4A5578;   /* body text — cool slate              */
-  --text-muted:     #8A92A8;   /* placeholder / captions — warm gray  */
+  /* Text — deep navy family */
+  --white:          #101828;   /* primary text — deep navy            */
+  --text-secondary: #596579;   /* body text — slate gray              */
+  --text-muted:     #8A92A8;   /* placeholder / captions              */
+
+  /* Gold accents */
+  --gold:       #C9A227;   /* primary accent — metallic gold       */
+  --gold-soft:  #E8C75A;   /* hover highlight — bright gold        */
+  --gold-deep:  #A8862A;   /* deep gold                            */
 
   /* Accent (unchanged) */
   --burgundy:   #7A1E35;
@@ -81,30 +86,33 @@
 
   /* ── Gradients ── */
   --grad-hero:
-    radial-gradient(1200px 600px at 15% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
-    radial-gradient(900px 500px at 85% 20%, rgba(168, 134, 42, 0.07) 0%, transparent 65%),
-    radial-gradient(700px 700px at 50% 100%, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
-    linear-gradient(180deg, #FAF8F3 0%, #F2EDE2 55%, #FAF8F3 100%);
+    radial-gradient(1200px 600px at 15% 10%, rgba(201, 162, 39, 0.08) 0%, transparent 60%),
+    radial-gradient(900px 500px at 85% 20%, rgba(140, 184, 232, 0.07) 0%, transparent 65%),
+    radial-gradient(700px 700px at 50% 100%, rgba(201, 162, 39, 0.05) 0%, transparent 70%),
+    linear-gradient(180deg, #F8F7F2 0%, #FFFFFF 55%, #F8F7F2 100%);
 
-  --grad-section: linear-gradient(180deg, #FAF8F3 0%, #F2EDE2 100%);
+  --grad-section: linear-gradient(180deg, #F8F7F2 0%, #FFFFFF 100%);
+
+  --grad-gold: linear-gradient(135deg, #E8C75A 0%, #D4AF37 45%, #C9A227 100%);
+  --grad-gold-soft: linear-gradient(135deg, #F5E1A1 0%, #C9A227 60%, #A8862A 100%);
 
   --grad-card:
-    linear-gradient(160deg, rgba(255, 254, 250, 0.85) 0%, rgba(255, 253, 248, 0.95) 100%);
+    linear-gradient(160deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 247, 242, 0.95) 100%);
 
   --grad-card-hover:
-    linear-gradient(160deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 253, 248, 1) 100%);
+    linear-gradient(160deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 247, 242, 1) 100%);
 
-  --grad-blue: linear-gradient(135deg, #EDE8DC 0%, #E3DAC8 100%);
+  --grad-blue: linear-gradient(135deg, #F0EFE9 0%, #E5E0D5 100%);
 
   /* ── Shadows — warm gold-tinted ── */
   --shadow-soft:      0 20px 60px rgba(80, 60, 20, 0.08);
-  --shadow-glow:      0 0 60px rgba(212, 175, 55, 0.18);
-  --shadow-blue:      0 0 80px rgba(180, 155, 60, 0.2);
-  --shadow-card:      0 8px 32px -8px rgba(130, 100, 30, 0.12),
-                      0 0 0 1px rgba(180, 155, 70, 0.18) inset;
-  --shadow-card-hover:0 20px 56px -12px rgba(130, 100, 30, 0.22),
-                      0 0 0 1px rgba(212, 175, 55, 0.38) inset;
+  --shadow-glow:      0 0 60px rgba(201, 162, 39, 0.18);
+  --shadow-blue:      0 0 80px rgba(140, 184, 232, 0.2);
+  --shadow-card:      0 8px 32px -8px rgba(130, 100, 30, 0.1),
+                      0 0 0 1px rgba(229, 224, 213, 0.8) inset;
+  --shadow-card-hover:0 20px 56px -12px rgba(130, 100, 30, 0.18),
+                      0 0 0 1px rgba(201, 162, 39, 0.38) inset;
 
   /* ── Ambient ── */
-  --grid-line: rgba(180, 155, 60, 0.1);
+  --grid-line: rgba(140, 184, 232, 0.1);
 }
