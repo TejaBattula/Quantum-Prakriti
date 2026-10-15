@@ -39,7 +39,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <span className="ahero__pill-dot" />
-            ABOUT Q-PRAKRITHI · EST. 2024
+            ABOUT Q-PRAKRITHI · EST. 2026
           </motion.span>
 
           <motion.h1
