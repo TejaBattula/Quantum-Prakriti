@@ -114,9 +114,47 @@ export default function Navbar() {
                 </NavLink>
               ))}
               <div className="nav__mobile-actions">
-                <Link to="/contact" className="nav__portal nav__portal--block">Client Portal</Link>
-                <Link to="/contact" className="nav__consult nav__consult--block">Consultation ↗</Link>
-              </div>
+
+{/* Mobile theme toggle */}
+<div className="nav__mobile-theme">
+  <span className="nav__mobile-theme-label">
+    {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+  </span>
+
+  <button
+    className="nav__theme-toggle"
+    onClick={toggleTheme}
+    aria-label={
+      theme === 'dark'
+        ? 'Switch to light mode'
+        : 'Switch to dark mode'
+    }
+    aria-pressed={theme === 'light'}
+    data-active={theme}
+  >
+    <div className="nav__theme-toggle__track">
+      <span className="nav__theme-toggle__icon" aria-hidden="true">
+        🌙
+      </span>
+
+      <span className="nav__theme-toggle__icon" aria-hidden="true">
+        ☀️
+      </span>
+    </div>
+
+    <span className="nav__theme-toggle__knob" />
+  </button>
+</div>
+
+<Link to="/contact" className="nav__portal nav__portal--block">
+  Client Portal
+</Link>
+
+<Link to="/contact" className="nav__consult nav__consult--block">
+  Consultation ↗
+</Link>
+
+</div>  
             </div>
           </motion.nav>
         )}

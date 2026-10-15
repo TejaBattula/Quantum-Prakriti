@@ -150,6 +150,7 @@
 }
 @media (max-width: 960px) {
   .nav__links, .nav__right { display: none; }
+  
   .nav__toggle { display: block; }
   .nav__mobile { display: block; }
 }
@@ -241,4 +242,40 @@
 [data-theme="light"] .nav__theme-toggle:hover {
   border-color: rgba(212, 175, 55, 0.7);
   background: rgba(212, 175, 55, 0.1);
+}
+/* ===== MOBILE THEME TOGGLE ===== */
+
+.nav__mobile-theme {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 4px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.18);
+}
+
+.nav__mobile-theme-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* Keep the toggle visible inside the mobile menu */
+.nav__mobile-theme .nav__theme-toggle {
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* Light theme */
+[data-theme="light"] .nav__mobile-theme {
+  border-bottom-color: rgba(130, 100, 30, 0.15);
+}
+
+[data-theme="light"] .nav__mobile-theme-label {
+  color: #333333;
+}
+
+/* Dark theme */
+[data-theme="dark"] .nav__mobile-theme-label {
+  color: #e5e5e5;
 }
