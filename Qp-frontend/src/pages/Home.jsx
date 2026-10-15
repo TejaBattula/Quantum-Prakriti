@@ -7,12 +7,24 @@ import {
   Puzzle, HeartHandshake, Lightbulb, ShieldAlert, Building2
 } from 'lucide-react';
 import QuantumVisual from '../components/QuantumCore.jsx';
-import ServiceCard from '../components/ServiceCard.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import QTechModalCards from '../components/QTModalCards.jsx';
 import StrokeText from '../components/StrokeText.jsx';
 import AccordionGallery from '../components/AccordionGallery.jsx';
+import OrbitImages from '../components/OrbitImages.jsx';
 import '../styles/home.css';
+import quantumComputing from '../assets/quantumsafe.jpeg';
+import quantumSafe from '../assets/PQC.png';
+import appliedResearch from '../assets/cryptography-photo.jpeg';
+import QC from "../assets/QC.jpeg"
+
+const orbitImages = [
+  { src: quantumComputing, alt: 'Quantum Computing' },
+  { src: quantumSafe, alt: 'Quantum-Safe Security' },
+  { src: appliedResearch, alt: 'Applied Research' },
+  { src: QC, alt: 'Quantum research' },
+
+];
 const partners = [
   { name: 'Partner One', logo: null },     // logo: '/logos/partner-one.png'
   { name: 'Partner Two', logo: null },
@@ -124,6 +136,23 @@ const qtechCards = [
     desc: 'Quantum sensing, communication, and networking extend the quantum technology landscape.',
     details: 'Quantum sensing targets highly precise measurements, quantum communication includes techniques such as quantum key distribution, and quantum networking explores linking quantum devices together.' },
 ];
+/* Orbit tiles: themed placeholders (swap `src` for real photos any time) */
+const orbitTile = (label, c1, c2) =>
+  `data:image/svg+xml;utf8,${encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 400 400'>
+      <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+        <stop offset='0' stop-color='${c1}'/><stop offset='1' stop-color='${c2}'/>
+      </linearGradient></defs>
+      <rect width='400' height='400' fill='url(#g)'/>
+      <g fill='none' stroke='rgba(212,175,55,0.35)' stroke-width='2'>
+        <circle cx='200' cy='170' r='50'/><circle cx='200' cy='170' r='90'/><circle cx='200' cy='170' r='130'/>
+      </g>
+      <text x='200' y='330' text-anchor='middle' fill='#D4AF37' font-family='sans-serif'
+            font-size='26' font-weight='600' letter-spacing='1'>${label}</text>
+    </svg>`
+  )}`;
+
+
 /* Gradient backgrounds for the panels (swap for real photos any time) */
 const panelBg = (c1, c2) =>
   `data:image/svg+xml;utf8,${encodeURIComponent(
@@ -241,19 +270,24 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          <motion.div className="intro__pillars" {...fadeUp}>
-            {[
-              { icon: Atom, label: 'Quantum Computing' },
-              { icon: ShieldCheck, label: 'Quantum-Safe Security' },
-              { icon: FlaskConical, label: 'Applied Research' },
-              { icon: Network, label: 'Resilient Infrastructure' },
-            ].map(({ icon: Icon, label }) => (
-              <div className="intro__pillar" key={label}>
-                <Icon size={20} strokeWidth={1.8} />
-                <span>{label}</span>
-              </div>
-            ))}
-          </motion.div>
+          <motion.div className="intro__orbit" {...fadeUp}>
+  <OrbitImages
+    images={orbitImages}
+    shape="ellipse"
+    radiusX={380}
+    radiusY={130}
+    rotation={-8}
+    duration={30}
+    itemSize={210}
+    itemRadius={16}
+    depth={0.6}
+    showPath
+    pathColor="rgba(212,175,55,0.35)"
+    pathDash={6}
+    hoverSpeed={0.2}
+    centerContent={<span className="intro__orbit-label">Q-Prakriti</span>}
+  />
+</motion.div>
         </div>
       </section>
 
