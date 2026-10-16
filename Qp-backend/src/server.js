@@ -5,14 +5,31 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
 import { encryptRecord } from './crypto.js';
+import { Resend } from 'resend';
 import ContactMessage from './model.js';
 
-const { PORT = 5000, MONGODB_URI, CORS_ORIGIN, MLKEM_PUBLIC_KEY } = process.env;
+const {
+  PORT = 5000,
+  MONGODB_URI,
+  CORS_ORIGIN,
+  MLKEM_PUBLIC_KEY,
+  RESEND_API_KEY,
+  FROM_EMAIL,
+  COMPANY_EMAIL,
+} = process.env;
 
-if (!MONGODB_URI || !MLKEM_PUBLIC_KEY) {
-  console.error('Missing MONGODB_URI or MLKEM_PUBLIC_KEY in .env');
+if (
+  !MONGODB_URI ||
+  !MLKEM_PUBLIC_KEY ||
+  !RESEND_API_KEY ||
+  !FROM_EMAIL ||
+  !COMPANY_EMAIL
+) {
+  console.error('Missing required environment variables in .env');
   process.exit(1);
 }
+
+const resend = new Resend(RESEND_API_KEY);
 
 const app = express();
 app.use(helmet());
@@ -40,25 +57,105 @@ function validate({ name, email, subject, message }) {
 
 app.post('/api/contact', limiter, async (req, res) => {
   try {
-    const error = validate(req.body || {});
-    if (error) return res.status(400).json({ error });
+    const { name, organisation = '', email, message } = req.body || {};
 
-    const { name, email, subject, message } = req.body;
-    const record = encryptRecord(
-      {
-        name: name.trim(),
-        email: email.trim(),
-        subject: subject.trim(),
-        message: message.trim(),
-      },
-      MLKEM_PUBLIC_KEY
-    );
+    const isValidString = (value, max) =>
+      typeof value === 'string' &&
+      value.trim().length > 0 &&
+      value.length <= max;
 
+    if (!isValidString(name, 100)) {
+      return res.status(400).json({ error: 'Invalid name' });
+    }
+
+    if (
+      typeof organisation !== 'string' ||
+      organisation.length > 200
+    ) {
+      return res.status(400).json({ error: 'Invalid organisation' });
+    }
+
+    if (
+      !isValidString(email, 200) ||
+      !EMAIL_RE.test(email.trim())
+    ) {
+      return res.status(400).json({ error: 'Invalid email' });
+    }
+
+    if (
+      !isValidString(message, 5000) ||
+      message.trim().length < 10
+    ) {
+      return res.status(400).json({ error: 'Invalid message' });
+    }
+
+    const contactData = {
+      name: name.trim(),
+      organisation: organisation.trim(),
+      email: email.trim(),
+      subject: 'New Q-Prakriti Website Enquiry',
+      message: message.trim(),
+    };
+
+    // 1. Encrypt and store the contact message.
+    const record = encryptRecord(contactData, MLKEM_PUBLIC_KEY);
     await ContactMessage.create(record);
-    res.status(201).json({ success: true });
+
+    // 2. Send a notification email to the company.
+    try {
+      const { data, error } = await resend.emails.send({
+        from: FROM_EMAIL,
+        to: [COMPANY_EMAIL],
+        replyTo: contactData.email,
+        subject: 'New Contact Form Submission - Q-Prakriti',
+        text: [
+          'A new contact form submission has been received.',
+          '',
+          `Name: ${contactData.name}`,
+          `Organisation: ${contactData.organisation || 'Not provided'}`,
+          `Visitor email: ${contactData.email}`,
+          '',
+          'Message:',
+          contactData.message,
+        ].join('\n'),
+      });
+
+      if (error) {
+        console.error('Resend error:', error);
+
+        return res.status(201).json({
+          success: true,
+          saved: true,
+          emailSent: false,
+          message: 'Message saved, but email notification failed.',
+        });
+      }
+
+      console.log('Email notification sent:', data?.id);
+
+      return res.status(201).json({
+        success: true,
+        saved: true,
+        emailSent: true,
+        message: 'Message submitted successfully.',
+      });
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError.message);
+
+      return res.status(201).json({
+        success: true,
+        saved: true,
+        emailSent: false,
+        message: 'Message saved, but email notification failed.',
+      });
+    }
   } catch (err) {
     console.error('Contact error:', err.message);
-    res.status(500).json({ error: 'Something went wrong' });
+
+    return res.status(500).json({
+      success: false,
+      error: 'Unable to process your message.',
+    });
   }
 });
 

@@ -29,8 +29,30 @@ const initialForm = {
    EmailJS, etc.). Until then this throws, so the form honestly
    tells the visitor that the message was NOT sent.
 ------------------------------------------------------------------- */
-async function sendMessage(/* data */) {
-  throw new Error('not-connected');
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
+async function sendMessage(data) {
+  const response = await fetch(`${API_BASE_URL}/api/contact`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: data.name.trim(),
+      organisation: data.organisation.trim(),
+      email: data.email.trim(),
+      message: data.message.trim(),
+    }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.error || 'Unable to submit your message.');
+  }
+
+  return result;
 }
 
 export default function Contact() {
