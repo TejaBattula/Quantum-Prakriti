@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe, Languages } from 'lucide-react';
+import { Menu, X, Languages, ChevronDown, Check } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import './Navbar.css';
-import qprakritimark from  "./q-prakriti-mark.png"
+import qprakritimark from './q-prakriti-mark.png';
+
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
@@ -14,9 +15,28 @@ const links = [
   { to: '/contact', label: 'Contact Us' },
 ];
 
+const languages = [
+  { code: 'en', label: 'English', native: 'English' },
+  { code: 'hi', label: 'Hindi', native: 'हिन्दी' },
+  { code: 'te', label: 'Telugu', native: 'తెలుగు' },
+  { code: 'ta', label: 'Tamil', native: 'தமிழ்' },
+  { code: 'kn', label: 'Kannada', native: 'ಕನ್ನಡ' },
+];
+
+const getSavedLang = () => {
+  try {
+    return localStorage.getItem('qp-lang') || 'en';
+  } catch {
+    return 'en';
+  }
+};
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [lang, setLang] = useState(getSavedLang);
+  const langRef = useRef(null);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
 
@@ -27,14 +47,55 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => { setOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    setOpen(false);
+    setLangOpen(false);
+  }, [location.pathname]);
+
+  // Close the language dropdown on outside click / Escape
+  useEffect(() => {
+    if (!langOpen) return;
+
+    const onPointerDown = (e) => {
+      if (langRef.current && !langRef.current.contains(e.target)) setLangOpen(false);
+    };
+    const onKey = (e) => {
+      if (e.key === 'Escape') setLangOpen(false);
+    };
+
+    document.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('touchstart', onPointerDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      document.removeEventListener('touchstart', onPointerDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [langOpen]);
+
+  // Remember choice + set <html lang>
+  const chooseLang = (code) => {
+    setLang(code);
+    setLangOpen(false);
+    document.documentElement.lang = code;
+    try {
+      localStorage.setItem('qp-lang', code);
+    } catch {
+      /* ignore */
+    }
+    // TODO: hook up real translation here (react-i18next / Google Translate)
+  };
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
 
   return (
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="nav__inner container">
         <Link to="/" className="nav__brand" aria-label="Q-Prakriti home">
           <span className="nav__mark">
-            <img src={qprakritimark} alt="logo"/>
+            <img src={qprakritimark} alt="logo" />
           </span>
           <span className="nav__word">Q-Prakriti</span>
         </Link>
@@ -53,12 +114,53 @@ export default function Navbar() {
         </nav>
 
         <div className="nav__right">
-          <button className="nav__icon-btn" aria-label="Language">
-            <Languages size={16} />
-          </button>
-          <button className="nav__icon-btn" aria-label="Region">
-            <Globe size={16} />
-          </button>
+          {/* Language dropdown */}
+          <div className="nav__lang" ref={langRef}>
+            <button
+              type="button"
+              className="nav__lang-btn"
+              onClick={() => setLangOpen((v) => !v)}
+              aria-label="Change language"
+              aria-haspopup="listbox"
+              aria-expanded={langOpen}
+            >
+              <Languages size={16} />
+              <ChevronDown
+                size={13}
+                className={`nav__lang-chevron ${langOpen ? 'is-open' : ''}`}
+              />
+            </button>
+
+            <AnimatePresence>
+              {langOpen && (
+                <motion.ul
+                  className="nav__lang-menu"
+                  role="listbox"
+                  aria-label="Language"
+                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                  transition={{ duration: 0.16 }}
+                >
+                  {languages.map((l) => (
+                    <li key={l.code} role="presentation">
+                      <button
+                        type="button"
+                        role="option"
+                        aria-selected={lang === l.code}
+                        className={`nav__lang-option ${lang === l.code ? 'is-active' : ''}`}
+                        onClick={() => chooseLang(l.code)}
+                      >
+                        <span className="nav__lang-native">{l.native}</span>
+                        <span className="nav__lang-label">{l.label}</span>
+                        {lang === l.code && <Check size={14} />}
+                      </button>
+                    </li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
 
           {/* Theme toggle pill */}
           <button
@@ -74,9 +176,8 @@ export default function Navbar() {
             <span className="nav__theme-toggle__knob" />
           </button>
 
-          <Link to="/contact" className="nav__portal">Client Portal</Link>
           <Link to="/contact" className="nav__consult">
-            Consultation
+            Book
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
               <path d="M7 17L17 7M9 7h8v8" />
             </svg>
@@ -113,48 +214,50 @@ export default function Navbar() {
                   {l.label}
                 </NavLink>
               ))}
+
               <div className="nav__mobile-actions">
+                {/* Mobile language */}
+                <div className="nav__mobile-theme">
+                  <span className="nav__mobile-theme-label">Language</span>
+                  <select
+                    className="nav__mobile-lang"
+                    value={lang}
+                    onChange={(e) => chooseLang(e.target.value)}
+                    aria-label="Change language"
+                  >
+                    {languages.map((l) => (
+                      <option key={l.code} value={l.code}>
+                        {l.native} ({l.label})
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-{/* Mobile theme toggle */}
-<div className="nav__mobile-theme">
-  <span className="nav__mobile-theme-label">
-    {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
-  </span>
+                {/* Mobile theme toggle */}
+                <div className="nav__mobile-theme">
+                  <span className="nav__mobile-theme-label">
+                    {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
+                  </span>
 
-  <button
-    className="nav__theme-toggle"
-    onClick={toggleTheme}
-    aria-label={
-      theme === 'dark'
-        ? 'Switch to light mode'
-        : 'Switch to dark mode'
-    }
-    aria-pressed={theme === 'light'}
-    data-active={theme}
-  >
-    <div className="nav__theme-toggle__track">
-      <span className="nav__theme-toggle__icon" aria-hidden="true">
-        🌙
-      </span>
+                  <button
+                    className="nav__theme-toggle"
+                    onClick={toggleTheme}
+                    aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+                    aria-pressed={theme === 'light'}
+                    data-active={theme}
+                  >
+                    <div className="nav__theme-toggle__track">
+                      <span className="nav__theme-toggle__icon" aria-hidden="true">🌙</span>
+                      <span className="nav__theme-toggle__icon" aria-hidden="true">☀️</span>
+                    </div>
+                    <span className="nav__theme-toggle__knob" />
+                  </button>
+                </div>
 
-      <span className="nav__theme-toggle__icon" aria-hidden="true">
-        ☀️
-      </span>
-    </div>
-
-    <span className="nav__theme-toggle__knob" />
-  </button>
-</div>
-
-<Link to="/contact" className="nav__portal nav__portal--block">
-  Client Portal
-</Link>
-
-<Link to="/contact" className="nav__consult nav__consult--block">
-  Consultation ↗
-</Link>
-
-</div>  
+                <Link to="/contact" className="nav__consult nav__consult--block">
+                  Book ↗
+                </Link>
+              </div>
             </div>
           </motion.nav>
         )}
