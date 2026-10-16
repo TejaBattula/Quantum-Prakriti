@@ -1,7 +1,16 @@
 import { motion } from 'framer-motion';
+import { Users } from 'lucide-react';
+import '../styles/team.css';
+
+/* ------------------------------------------------------------------
+   TEAM PAGE: temporarily showing "Coming Soon".
+   The original page is kept below (commented out) so it can be
+   restored once official team information is available.
+------------------------------------------------------------------- */
+
+/*
 import { BriefcaseBusiness, Mail, User } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading.jsx';
-import '../styles/team.css';
 
 const placeholders = Array.from({ length: 6 }).map((_, i) => ({
   id: i,
@@ -9,10 +18,13 @@ const placeholders = Array.from({ length: 6 }).map((_, i) => ({
   role: 'Designation Placeholder',
   bio: 'Short professional biography will appear here once official team information is provided.',
 }));
+*/
 
 export default function Team() {
   return (
     <>
+      {/* ORIGINAL TEAM PAGE (commented out)
+
       <section className="page-hero">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
@@ -57,6 +69,30 @@ export default function Team() {
               </motion.article>
             ))}
           </div>
+        </div>
+      </section>
+
+      */}
+
+      {/* COMING SOON */}
+      <section className="section section--dark team-soon">
+        <div className="container">
+          <motion.div
+            className="team-soon__inner"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="team-soon__icon" aria-hidden="true">
+              <Users size={38} strokeWidth={1.5} />
+            </div>
+            <span className="eyebrow">Our Team</span>
+            <h1 className="team-soon__title">Coming Soon</h1>
+            <p className="team-soon__text">
+              We are putting together our team page. Meet the people behind
+              Q-Prakrithi very soon.
+            </p>
+          </motion.div>
         </div>
       </section>
     </>

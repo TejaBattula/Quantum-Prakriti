@@ -72,3 +72,67 @@
   box-shadow: 0 0 0 6px rgba(201, 162, 39, 0.06), 0 12px 30px -12px rgba(140, 184, 232, 0.3);
 }
 [data-theme="light"] .team-card__socials { color: var(--text-muted); }
+/* ADD to the end of team.css. Old .team-card styles can stay; they are simply unused for now. */
+
+.team-soon {
+  display: grid;
+  place-items: center;
+  min-height: 80vh;
+  padding-top: calc(var(--space-9) + 40px);
+}
+
+.team-soon__inner {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-soon__icon {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto var(--space-5);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--gold);
+  background: radial-gradient(circle at 30% 30%, rgba(79, 127, 255, 0.35), rgba(4, 6, 11, 0.95));
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.06), 0 20px 40px -20px rgba(79, 127, 255, 0.6);
+}
+
+/* slowly rotating gold ring */
+.team-soon__icon::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.7), transparent 40%);
+  -webkit-mask: radial-gradient(circle, transparent 55%, #000 56%);
+          mask: radial-gradient(circle, transparent 55%, #000 56%);
+  animation: spinSlow 8s linear infinite;
+}
+
+.team-soon__title {
+  margin: var(--space-3) 0 var(--space-4);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.team-soon__text {
+  margin: 0 auto;
+  max-width: 460px;
+  color: var(--text-secondary);
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+[data-theme="light"] .team-soon__icon {
+  background: radial-gradient(circle at 30% 30%, rgba(140, 184, 232, 0.2), rgba(255, 255, 255, 0.9));
+  box-shadow: 0 0 0 6px rgba(201, 162, 39, 0.06), 0 12px 30px -12px rgba(140, 184, 232, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-soon__icon::before { animation: none; }
+}

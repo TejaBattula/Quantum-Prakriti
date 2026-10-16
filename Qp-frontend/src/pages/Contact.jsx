@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 import {
@@ -11,186 +11,100 @@ import {
   BriefcaseBusiness,
   X,
   Code2,
-  User,
-  MessageSquare,
-  ClipboardCheck,
 } from 'lucide-react';
 
 import SectionHeading from '../components/SectionHeading.jsx';
-import Stepper, { Step } from '../components/stepper.jsx';
 
 import '../styles/contact.css';
 
 const initialForm = {
   name: '',
+  organisation: '',
   email: '',
-  subject: '',
   message: '',
 };
+
+/* ------------------------------------------------------------------
+   TODO: connect a real delivery service here (own API, Formspree,
+   EmailJS, etc.). Until then this throws, so the form honestly
+   tells the visitor that the message was NOT sent.
+------------------------------------------------------------------- */
+async function sendMessage(/* data */) {
+  throw new Error('not-connected');
+}
 
 export default function Contact() {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('idle');
-  const [theme, setTheme] = useState('dark');
+  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
 
-  // Synchronize the form theme with the website theme.
-  useEffect(() => {
-    const updateTheme = () => {
-      const currentTheme =
-        document.documentElement.getAttribute('data-theme');
-
-      setTheme(currentTheme === 'light' ? 'light' : 'dark');
-    };
-
-    updateTheme();
-
-    const observer = new MutationObserver(updateTheme);
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme'],
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Validate the supplied fields.
   const validate = (fields) => {
-    const nextErrors = {};
+    const next = {};
 
-    if (
-      fields.name !== undefined &&
-      !fields.name.trim()
-    ) {
-      nextErrors.name = 'Please enter your name.';
+    if (!fields.name.trim()) {
+      next.name = 'Please enter your name.';
     }
 
-    if (fields.email !== undefined) {
-      if (!fields.email.trim()) {
-        nextErrors.email = 'Please enter your email.';
-      } else if (
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-          fields.email.trim()
-        )
-      ) {
-        nextErrors.email = 'Please enter a valid email address.';
-      }
+    if (!fields.email.trim()) {
+      next.email = 'Please enter your email.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.trim())) {
+      next.email = 'Please enter a valid email address.';
     }
 
-    if (
-      fields.subject !== undefined &&
-      !fields.subject.trim()
-    ) {
-      nextErrors.subject = 'Please enter a subject.';
+    if (!fields.message.trim()) {
+      next.message = 'Please enter your message.';
+    } else if (fields.message.trim().length < 10) {
+      next.message = 'Please provide a message of at least 10 characters.';
     }
 
-    if (fields.message !== undefined) {
-      if (!fields.message.trim()) {
-        nextErrors.message = 'Please enter your message.';
-      } else if (fields.message.trim().length < 10) {
-        nextErrors.message =
-          'Please provide a message of at least 10 characters.';
-      }
-    }
-
-    return nextErrors;
+    return next;
   };
 
-  // Handle changes to individual fields.
   const handleChange = (field) => (event) => {
     const value = event.target.value;
 
-    setForm((previous) => ({
-      ...previous,
-      [field]: value,
-    }));
+    setForm((prev) => ({ ...prev, [field]: value }));
 
-    setErrors((previous) => {
-      const updated = { ...previous };
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const updated = { ...prev };
       delete updated[field];
       return updated;
     });
 
-    if (status === 'error') {
-      setStatus('idle');
-    }
+    if (status === 'error') setStatus('idle');
   };
 
-  // Validate only the fields belonging to the current step.
-  const validateStep = (fields) => {
-    const stepErrors = validate(fields);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (status === 'submitting') return;
 
-    setErrors((previous) => {
-      const updated = { ...previous };
+    const found = validate(form);
+    setErrors(found);
+    if (Object.keys(found).length > 0) return;
 
-      Object.keys(fields).forEach((field) => {
-        delete updated[field];
-      });
-
-      return {
-        ...updated,
-        ...stepErrors,
-      };
-    });
-
-    return Object.keys(stepErrors).length === 0;
-  };
-
-  const validateDetails = () =>
-    validateStep({
-      name: form.name,
-      email: form.email,
-    });
-
-  const validateEnquiry = () =>
-    validateStep({
-      subject: form.subject,
-      message: form.message,
-    });
-
-  // Called when the user completes the final step.
-  const handleSubmit = () => {
-    const allErrors = validate(form);
-
-    setErrors(allErrors);
-
-    if (Object.keys(allErrors).length > 0) {
-      setStatus('idle');
-      return false;
-    }
-
-    // Demonstration only: no backend is connected.
     setStatus('submitting');
 
-    window.setTimeout(() => {
+    try {
+      await sendMessage(form);
+      setStatus('success');
+    } catch {
       setStatus('error');
-    }, 1200);
-
-    return true;
+    }
   };
 
-  // Reset the form after the completion screen.
   const resetForm = () => {
     setForm(initialForm);
     setErrors({});
     setStatus('idle');
   };
 
-  // Display a field validation message.
-  const fieldError = (field) => {
-    if (!errors[field]) return null;
-
-    return (
-      <span
-        id={`${field}-error`}
-        className="field__error"
-        role="alert"
-      >
+  const fieldError = (field) =>
+    errors[field] ? (
+      <span id={`${field}-error`} className="field__error" role="alert">
         {errors[field]}
       </span>
-    );
-  };
+    ) : null;
 
   return (
     <>
@@ -217,7 +131,6 @@ export default function Contact() {
       {/* CONTACT SECTION */}
       <section className="section section--dark">
         <div className="container contact-grid">
-
           {/* LEFT: CONTACT INFORMATION */}
           <motion.div
             className="contact-info"
@@ -226,42 +139,30 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.55 }}
           >
-            <SectionHeading
-              eyebrow="Get in touch"
-              title="Contact information"
-            />
+            <SectionHeading eyebrow="Get in touch" title="Contact information" />
 
             <ul className="contact-info__list">
               <li>
                 <Mail size={18} />
-
                 <div>
                   <strong>Email</strong>
-                  <span>
-                    contact@q-prakrithi.example
-                  </span>
+                  <span>contact@q-prakrithi.example</span>
                 </div>
               </li>
 
               <li>
                 <Phone size={18} />
-
                 <div>
                   <strong>Phone</strong>
-                  <span>
-                    +00 000 000 0000 (placeholder)
-                  </span>
+                  <span>+00 000 000 0000 (placeholder)</span>
                 </div>
               </li>
 
               <li>
                 <MapPin size={18} />
-
                 <div>
                   <strong>Office Address</strong>
-                  <span>
-                    Office address placeholder — to be confirmed.
-                  </span>
+                  <span>Office address placeholder — to be confirmed.</span>
                 </div>
               </li>
             </ul>
@@ -281,157 +182,82 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* RIGHT: ANIMATED CONTACT FORM */}
+          {/* RIGHT: SIMPLE CONTACT FORM */}
           <motion.div
-            className="contact-form contact-form--stepper"
+            className="contact-form"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, delay: 0.1 }}
           >
-            <div className="contact-form__heading">
-              <span className="eyebrow">
-                Let's connect
-              </span>
-
-              <h2>Send us a message</h2>
-
-              <p>
-                Complete these quick steps to tell us how
-                we can help.
-              </p>
-            </div>
-
-            <Stepper
-              initialStep={1}
-              onFinalStepCompleted={handleSubmit}
-              backButtonText="Back"
-              nextButtonText="Continue"
-              completeButtonText="Send Message"
-              indicator="numbers"
-              orientation="horizontal"
-              transition="slide"
-              linear={true}
-              theme={theme}
-              accentColor="#d4af37"
-              frame={false}
-              radius={18}
-              width="100%"
-              className="contact-stepper"
-              nextButtonProps={{
-                onClick: (event) => {
-                  const stepper =
-                    event.currentTarget.closest('.stepper');
-
-                  if (!stepper) return;
-
-                  const activeTitle = stepper.querySelector(
-                    '.stepper__title[data-status="active"]'
-                  )?.textContent?.trim();
-
-                  let valid = true;
-
-                  if (activeTitle === 'Your Details') {
-                    valid = validateDetails();
-                  } else if (
-                    activeTitle === 'Your Enquiry'
-                  ) {
-                    valid = validateEnquiry();
-                  }
-
-                  if (!valid) {
-                    event.preventDefault();
-                  }
-                },
-              }}
-              completedContent={
-                <div className="contact-completed">
-                  <div className="contact-completed__icon">
-                    {status === 'error' ? (
-                      <AlertCircle size={30} />
-                    ) : status === 'submitting' ? (
-                      <Send size={30} />
-                    ) : (
-                      <CheckCircle2 size={30} />
-                    )}
-                  </div>
-
-                  <h3>
-                    {status === 'submitting'
-                      ? 'Preparing your message…'
-                      : status === 'error'
-                        ? 'Message not delivered'
-                        : 'Thank you!'}
-                  </h3>
-
-                  <p>
-                    {status === 'submitting'
-                      ? 'Your form has passed validation. Please wait…'
-                      : status === 'error'
-                        ? 'This form is not connected to a message delivery service yet. Your message has not been sent.'
-                        : 'Your form has been completed.'}
-                  </p>
-
-                  {status === 'error' && (
-                    <p className="contact-completed__note">
-                      Connect a backend or email service to
-                      receive messages from this form.
-                    </p>
-                  )}
-
-                  <button
-                    type="button"
-                    className="btn btn--gold btn--md"
-                    onClick={resetForm}
-                  >
-                    Start Again
-                  </button>
+            {status === 'success' ? (
+              <div className="contact-completed">
+                <div className="contact-completed__icon">
+                  <CheckCircle2 size={30} />
                 </div>
-              }
-            >
 
-              {/* STEP 1: YOUR DETAILS */}
-              <Step
-                title="Your Details"
-                description="Tell us who you are"
-                icon={<User size={17} />}
-              >
-                <div className="contact-step-content">
-                  <div>
-                    <h3>Your Details</h3>
+                <h3>Thank you!</h3>
 
-                    <p className="contact-step-content__lead">
-                      Let's start with your name and email address.
-                    </p>
-                  </div>
+                <p>
+                  Your message has been sent. Our team will get back to you soon.
+                </p>
 
-                  <div className="field">
-                    <label htmlFor="contact-name">
-                      Full Name <span>*</span>
-                    </label>
+                <button
+                  type="button"
+                  className="btn btn--gold btn--md"
+                  onClick={resetForm}
+                >
+                  Send Another Message
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="contact-form__heading">
+                  <span className="eyebrow">Let's connect</span>
+                  <h2>Send us a message</h2>
+                  <p>Tell us how we can help and we will get back to you.</p>
+                </div>
 
-                    <input
-                      id="contact-name"
-                      name="name"
-                      type="text"
-                      autoComplete="name"
-                      value={form.name}
-                      onChange={handleChange('name')}
-                      aria-invalid={!!errors.name}
-                      aria-describedby={
-                        errors.name ? 'name-error' : undefined
-                      }
-                      placeholder="Enter your full name"
-                    />
+                <form className="contact-form__form" onSubmit={handleSubmit} noValidate>
+                  <div className="field-row">
+                    <div className="field">
+                      <label htmlFor="contact-name">
+                        Name <span>*</span>
+                      </label>
+                      <input
+                        id="contact-name"
+                        name="name"
+                        type="text"
+                        autoComplete="name"
+                        value={form.name}
+                        onChange={handleChange('name')}
+                        aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? 'name-error' : undefined}
+                        placeholder="Your full name"
+                      />
+                      {fieldError('name')}
+                    </div>
 
-                    {fieldError('name')}
+                    <div className="field">
+                      <label htmlFor="contact-organisation">
+                        Organisation <em>(optional)</em>
+                      </label>
+                      <input
+                        id="contact-organisation"
+                        name="organisation"
+                        type="text"
+                        autoComplete="organization"
+                        value={form.organisation}
+                        onChange={handleChange('organisation')}
+                        placeholder="Company or institution"
+                      />
+                    </div>
                   </div>
 
                   <div className="field">
                     <label htmlFor="contact-email">
-                      Email Address <span>*</span>
+                      Email <span>*</span>
                     </label>
-
                     <input
                       id="contact-email"
                       name="email"
@@ -440,60 +266,16 @@ export default function Contact() {
                       value={form.email}
                       onChange={handleChange('email')}
                       aria-invalid={!!errors.email}
-                      aria-describedby={
-                        errors.email ? 'email-error' : undefined
-                      }
+                      aria-describedby={errors.email ? 'email-error' : undefined}
                       placeholder="you@example.com"
                     />
-
                     {fieldError('email')}
-                  </div>
-                </div>
-              </Step>
-
-              {/* STEP 2: YOUR ENQUIRY */}
-              <Step
-                title="Your Enquiry"
-                description="Tell us what you need"
-                icon={<MessageSquare size={17} />}
-              >
-                <div className="contact-step-content">
-                  <div>
-                    <h3>Your Enquiry</h3>
-
-                    <p className="contact-step-content__lead">
-                      Tell us about your question or project.
-                    </p>
-                  </div>
-
-                  <div className="field">
-                    <label htmlFor="contact-subject">
-                      Subject <span>*</span>
-                    </label>
-
-                    <input
-                      id="contact-subject"
-                      name="subject"
-                      type="text"
-                      value={form.subject}
-                      onChange={handleChange('subject')}
-                      aria-invalid={!!errors.subject}
-                      aria-describedby={
-                        errors.subject
-                          ? 'subject-error'
-                          : undefined
-                      }
-                      placeholder="How can we help?"
-                    />
-
-                    {fieldError('subject')}
                   </div>
 
                   <div className="field">
                     <label htmlFor="contact-message">
                       Message <span>*</span>
                     </label>
-
                     <textarea
                       id="contact-message"
                       name="message"
@@ -501,66 +283,31 @@ export default function Contact() {
                       value={form.message}
                       onChange={handleChange('message')}
                       aria-invalid={!!errors.message}
-                      aria-describedby={
-                        errors.message
-                          ? 'message-error'
-                          : undefined
-                      }
+                      aria-describedby={errors.message ? 'message-error' : undefined}
                       placeholder="Tell us about your enquiry..."
                     />
-
                     {fieldError('message')}
                   </div>
-                </div>
-              </Step>
 
-              {/* STEP 3: REVIEW */}
-              <Step
-                title="Review"
-                description="Check your information"
-                icon={<ClipboardCheck size={17} />}
-              >
-                <div className="contact-step-content">
-                  <div>
-                    <h3>Review your message</h3>
-
-                    <p className="contact-step-content__lead">
-                      Check your details before completing the form.
-                    </p>
-                  </div>
-
-                  <div className="contact-review">
-                    <div className="contact-review__item">
-                      <span>Name</span>
-                      <strong>
-                        {form.name || 'Not provided'}
-                      </strong>
+                  {status === 'error' && (
+                    <div className="form-status form-status--err" role="alert">
+                      <AlertCircle size={16} />
+                      Message not sent. This form is not connected to an email
+                      service yet.
                     </div>
+                  )}
 
-                    <div className="contact-review__item">
-                      <span>Email</span>
-                      <strong>
-                        {form.email || 'Not provided'}
-                      </strong>
-                    </div>
-
-                    <div className="contact-review__item">
-                      <span>Subject</span>
-                      <strong>
-                        {form.subject || 'Not provided'}
-                      </strong>
-                    </div>
-
-                    <div className="contact-review__item">
-                      <span>Message</span>
-                      <p>
-                        {form.message || 'Not provided'}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Step>
-            </Stepper>
+                  <button
+                    type="submit"
+                    className="btn btn--gold btn--md contact-form__submit"
+                    disabled={status === 'submitting'}
+                  >
+                    {status === 'submitting' ? 'Sending…' : 'Send Message'}
+                    <Send size={15} />
+                  </button>
+                </form>
+              </>
+            )}
           </motion.div>
         </div>
       </section>
