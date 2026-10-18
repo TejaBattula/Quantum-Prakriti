@@ -6,6 +6,14 @@ import {
   Cpu, Atom, ShieldCheck, Zap, Network, FlaskConical, Microscope,
 } from 'lucide-react';
 import '../styles/services.css';
+import {  RotateCw, /* ...your existing icons */ } from 'lucide-react';
+import TiltedCard, { TiltedCardLayer } from '../components/TiltedCard';
+import cardImg1 from '../assets/q-optimization.jpg'; 
+import cardImg2 from '../assets/PQC.png'; 
+import cardImg3 from '../assets/bio-molecular.jpeg'; 
+import cardImg4 from '../assets/q-reselient-neural.jpeg'; 
+import cardImg5 from '../assets/q-cloud.jpeg'; 
+import cardImg6 from '../assets/q-advisory.jpeg'; 
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -19,6 +27,7 @@ const filters = ['All Solutions', 'Quantum Computing', 'Bio-Informatics', 'Post-
 const primaryServices = [
   {
     icon: Atom,
+    image : cardImg1,
     badge: 'SPEEDUP · 100x',
     badgeTone: 'blue',
     title: 'Quantum Optimization Engine',
@@ -30,6 +39,8 @@ const primaryServices = [
   },
   {
     icon: Lock,
+    image :cardImg2,
+
     badge: 'NIST STANDARDIZED',
     badgeTone: 'red',
     title: 'Post-Quantum Cryptography (PQC)',
@@ -41,6 +52,8 @@ const primaryServices = [
   },
   {
     icon: FlaskConical,
+    image : cardImg3,
+
     badge: 'AB INITIO ACCURACY',
     badgeTone: 'gold',
     title: 'Bio-Molecular Simulation & Discovery',
@@ -55,6 +68,8 @@ const primaryServices = [
 const secondaryServices = [
   {
     icon: Cpu,
+    image : cardImg4,
+
     badge: 'HYBRID GPU',
     title: 'Quantum-Resilient Neural Architectures',
     desc: 'Parameterized quantum circuits interwoven with high-parameter LLMs and classical convolutional frameworks for hyper-dimensional pattern recognition.',
@@ -62,6 +77,8 @@ const secondaryServices = [
   },
   {
     icon: Network,
+    image : cardImg5,
+
     badge: 'CRYOGENIC BUS',
     title: 'Enterprise Quantum Cloud (QaaS)',
     desc: 'Low-latency direct gRPC/REST endpoints into Dilution Refrigerator arrays, coupled with error mitigation pipelines and qubit scheduling.',
@@ -69,6 +86,8 @@ const secondaryServices = [
   },
   {
     icon: ShieldCheck,
+    image : cardImg6,
+
     badge: 'TIER-1 ADVISORY',
     title: 'Specialized Quantum Advisory & Architecture',
     desc: 'Enterprise transformation roadmaps, proof-of-concept synthesis, patent IP defensibility, and algorithmic transition for executive leadership teams.',
@@ -242,6 +261,81 @@ function FrameworkTimeline() {
     </div>
   );
 }
+function ServiceTile({ s, i, variant, height = 310 }) {
+  const [flipped, setFlipped] = useState(false);
+  const stop = (e) => e.stopPropagation();
+  const tone = s.badgeTone || 'plain';
+
+  return (
+    <motion.div {...fadeUp} transition={{ duration: 0.5, delay: i * 0.06 }}>
+      <TiltedCard
+        className="svc-tilt"
+        imageSrc={s.image}
+        altText=""
+        captionText={s.title}
+        containerWidth="100%"
+        containerHeight={height}
+        imageWidth="100%"
+        imageHeight="100%"
+        radius={14}
+        rotateAmplitude={8}
+        scaleOnHover={1.03}
+        glare={0.35}
+        glareColor="#f5dc8a"
+        shadow={0.6}
+        parallax={0.6}
+        showTooltip={false}
+        intro={false}
+        flipped={flipped}
+        onFlip={setFlipped}
+        backContent={
+          <div className={`svc-tile svc-tile--back ${variant}`}>
+            <div className="svc-tile__top">
+              <div className="svc-tile__icon"><s.icon size={16} strokeWidth={1.8} /></div>
+              <span className={`svc-badge svc-badge--${tone}`}>{s.badge}</span>
+            </div>
+            <h3 className="svc-tile__title">{s.title}</h3>
+            <p className="svc-tile__desc">{s.desc}</p>
+            <div className="svc-tile__meta">
+              {s.meta.map((m) => (
+                <span key={m.k}><em>{m.k}</em><strong>{m.v}</strong></span>
+              ))}
+            </div>
+            <div className="svc-tile__foot svc-tile__foot--split">
+              <Link
+                to={s.to || '/contact'}
+                className="svc-tile__cta"
+                onClick={stop}
+                tabIndex={flipped ? 0 : -1}
+              >
+                Explore Route <ChevronRight size={12} />
+              </Link>
+              <span className="svc-tile__hint">
+                <RotateCw size={11} /> Flip back
+              </span>
+            </div>
+          </div>
+        }
+      >
+        {/* FRONT: photo (from imageSrc) + shade + floating content */}
+        <div className="svc-front__shade" aria-hidden="true" />
+        <TiltedCardLayer depth={16} className={`svc-front svc-front--${tone}`}>
+          <div className="svc-front__top">
+            <div className="svc-tile__icon"><s.icon size={18} strokeWidth={1.8} /></div>
+            <span className={`svc-badge svc-badge--${tone}`}>{s.badge}</span>
+          </div>
+          <div className="svc-front__body">
+            <h3 className="svc-front__title">{s.title}</h3>
+            <p className="svc-front__short">{s.short}</p>
+            <span className="svc-front__hint">
+              <RotateCw size={12} /> Flip for details
+            </span>
+          </div>
+        </TiltedCardLayer>
+      </TiltedCard>
+    </motion.div>
+  );
+}
 export default function Services() {
   const [active, setActive] = useState('All Solutions');
 
@@ -324,61 +418,16 @@ export default function Services() {
           </div>
 
           <div className="svc-grid">
-            {primaryServices.map((s, i) => (
-              <motion.article
-                key={s.title}
-                className={`svc-tile svc-tile--${s.badgeTone}`}
-                {...fadeUp}
-                transition={{ duration: 0.5, delay: i * 0.06 }}
-              >
-                <div className="svc-tile__top">
-                  <div className="svc-tile__icon"><s.icon size={18} strokeWidth={1.8} /></div>
-                  <span className={`svc-badge svc-badge--${s.badgeTone}`}>{s.badge}</span>
-                </div>
-                <h3 className="svc-tile__title">{s.title}</h3>
-                <p className="svc-tile__desc">{s.desc}</p>
-                <div className="svc-tile__meta">
-                  {s.meta.map((m) => (
-                    <span key={m.k}>
-                      <em>{m.k}</em>
-                      <strong>{m.v}</strong>
-                    </span>
-                  ))}
-                </div>
-                <div className="svc-tile__foot">
-                  <button className="svc-tile__cta">
-                    Explore Route <ChevronRight size={12} />
-                  </button>
-                </div>
-              </motion.article>
-            ))}
-          </div>
+  {primaryServices.map((s, i) => (
+    <ServiceTile key={s.title} s={s} i={i} variant={`svc-tile--${s.badgeTone}`} height={380} withCta />
+  ))}
+</div>
 
-          <div className="svc-grid svc-grid--sub">
-            {secondaryServices.map((s, i) => (
-              <motion.article
-                key={s.title}
-                className="svc-tile svc-tile--plain"
-                {...fadeUp}
-                transition={{ duration: 0.5, delay: i * 0.06 }}
-              >
-                <div className="svc-tile__top">
-                  <div className="svc-tile__icon"><s.icon size={18} strokeWidth={1.8} /></div>
-                  <span className="svc-badge svc-badge--plain">{s.badge}</span>
-                </div>
-                <h3 className="svc-tile__title">{s.title}</h3>
-                <p className="svc-tile__desc">{s.desc}</p>
-                <div className="svc-tile__meta">
-                  {s.meta.map((m) => (
-                    <span key={m.k}>
-                      <em>{m.k}</em>
-                      <strong>{m.v}</strong>
-                    </span>
-                  ))}
-                </div>
-              </motion.article>
-            ))}
-          </div>
+<div className="svc-grid svc-grid--sub">
+  {secondaryServices.map((s, i) => (
+    <ServiceTile key={s.title} s={s} i={i} variant={`svc-tile--${s.badgeTone}`} height={380} />
+  ))}
+</div>
         </div>
       </section>
 

@@ -115,52 +115,7 @@ export default function Navbar() {
 
         <div className="nav__right">
           {/* Language dropdown */}
-          <div className="nav__lang" ref={langRef}>
-            <button
-              type="button"
-              className="nav__lang-btn"
-              onClick={() => setLangOpen((v) => !v)}
-              aria-label="Change language"
-              aria-haspopup="listbox"
-              aria-expanded={langOpen}
-            >
-              <Languages size={16} />
-              <ChevronDown
-                size={13}
-                className={`nav__lang-chevron ${langOpen ? 'is-open' : ''}`}
-              />
-            </button>
-
-            <AnimatePresence>
-              {langOpen && (
-                <motion.ul
-                  className="nav__lang-menu"
-                  role="listbox"
-                  aria-label="Language"
-                  initial={{ opacity: 0, y: -6, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                  transition={{ duration: 0.16 }}
-                >
-                  {languages.map((l) => (
-                    <li key={l.code} role="presentation">
-                      <button
-                        type="button"
-                        role="option"
-                        aria-selected={lang === l.code}
-                        className={`nav__lang-option ${lang === l.code ? 'is-active' : ''}`}
-                        onClick={() => chooseLang(l.code)}
-                      >
-                        <span className="nav__lang-native">{l.native}</span>
-                        <span className="nav__lang-label">{l.label}</span>
-                        {lang === l.code && <Check size={14} />}
-                      </button>
-                    </li>
-                  ))}
-                </motion.ul>
-              )}
-            </AnimatePresence>
-          </div>
+          
 
           {/* Theme toggle pill */}
           <button

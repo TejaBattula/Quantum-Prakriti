@@ -91,7 +91,7 @@ export default function Footer() {
             <ul className="footer__list footer__list--contact">
               <li>
                 <Mail size={16} aria-hidden="true" />
-                <a href="mailto:contact@q-prakrithi.example">
+                <a href="mailto:quantum-prakriti@gmail.com">
                   quantum-prakriti@gmail.com
                 </a>
               </li>
