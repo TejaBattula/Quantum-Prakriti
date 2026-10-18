@@ -15,6 +15,8 @@ import Team from './pages/Team.jsx';
 import Careers from './pages/Careers.jsx';
 import Contact from './pages/Contact.jsx';
 import NotFound from './pages/NotFound.jsx';
+import BookDemo from './pages/BookDemo';
+
 
 const pageVariants = {
   initial: {
@@ -166,6 +168,7 @@ export default function App() {
               </PageWrapper>
             }
           />
+          <Route path="/book-demo" element={<BookDemo />} />
           <Route
             path="*"
             element={

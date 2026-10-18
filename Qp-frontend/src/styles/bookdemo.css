@@ -1,0 +1,164 @@
+/* ================= BOOK A DEMO PAGE ================= */
+.demo {
+  position: relative;
+  min-height: 100vh;
+  padding: 92px 0 var(--space-9);
+  background: var(--black);
+  color: var(--text-secondary);
+  overflow: hidden;
+}
+
+/* Background */
+.demo__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 600px at 50% 0%, rgba(22, 38, 78, 0.55) 0%, transparent 62%),
+    radial-gradient(900px 480px at 88% 40%, rgba(100, 30, 53, 0.16) 0%, transparent 65%),
+    linear-gradient(180deg, #04060B 0%, #070b1a 55%, #04060B 100%);
+}
+.demo__grid {
+  position: absolute;
+  inset: -10% -10%;
+  background-image:
+    linear-gradient(rgba(79, 127, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 127, 255, 0.05) 1px, transparent 1px);
+  background-size: 62px 62px;
+  mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 80%);
+}
+.demo__glow { position: absolute; border-radius: 50%; filter: blur(120px); }
+.demo__glow--blue {
+  width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(79, 127, 255, 0.2), transparent 70%);
+  top: -220px; left: 50%; transform: translateX(-50%);
+}
+.demo__glow--gold {
+  width: 460px; height: 460px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.13), transparent 70%);
+  bottom: -120px; right: -100px;
+}
+
+/* Content */
+.demo__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.demo__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(11, 20, 42, 0.7);
+  border: 1px solid rgba(212, 175, 55, 0.32);
+  color: var(--gold);
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  font-weight: 700;
+  margin: var(--space-7) 0 var(--space-5);
+}
+
+.demo__title {
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  font-weight: 700;
+  margin: 0 0 var(--space-4);
+}
+
+.demo__lead {
+  max-width: 600px;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0 auto var(--space-5);
+}
+
+.demo__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-5);
+  margin-bottom: var(--space-7);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.demo__meta span { display: inline-flex; align-items: center; gap: 8px; }
+.demo__meta svg { color: var(--gold); }
+
+/* Calendar frame */
+.demo__frame {
+  position: relative;
+  width: 100%;
+  max-width: 1040px;
+  height: 640px;
+  border-radius: 18px;
+  overflow: hidden;
+  text-align: left;
+  background: rgba(11, 20, 42, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow:
+    0 40px 80px -40px rgba(0, 0, 0, 1),
+    0 0 60px -20px rgba(79, 127, 255, 0.18);
+}
+.demo__frame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 55%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ========= Responsive ========= */
+@media (max-width: 1024px) {
+  .demo__frame { height: 680px; }
+}
+@media (max-width: 768px) {
+  .demo__frame { height: 760px; border-radius: 14px; }
+  .demo__meta { gap: var(--space-4); }
+}
+
+/* ===== LIGHT THEME ===== */
+[data-theme="light"] .demo { background: var(--black); }
+[data-theme="light"] .demo__bg {
+  background:
+    radial-gradient(1200px 600px at 50% 0%, rgba(212, 175, 55, 0.09) 0%, transparent 62%),
+    radial-gradient(900px 480px at 88% 40%, rgba(168, 134, 42, 0.06) 0%, transparent 65%),
+    linear-gradient(180deg, #FAF8F3 0%, #F2EDE2 55%, #FAF8F3 100%);
+}
+[data-theme="light"] .demo__glow--blue {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent 70%);
+}
+[data-theme="light"] .demo__glow--gold {
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 70%);
+}
+[data-theme="light"] .demo__grid {
+  background-image:
+    linear-gradient(rgba(168, 134, 42, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 134, 42, 0.07) 1px, transparent 1px);
+}
+[data-theme="light"] .demo__pill {
+  background: rgba(255, 253, 248, 0.88);
+  border-color: rgba(212, 175, 55, 0.45);
+}
+[data-theme="light"] .demo__frame {
+  background: rgba(255, 253, 248, 0.9);
+  border-color: rgba(180, 155, 70, 0.3);
+  box-shadow: 0 16px 48px -16px rgba(130, 100, 30, 0.2);
+}

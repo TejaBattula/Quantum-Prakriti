@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Languages, ChevronDown, Check } from 'lucide-react';
+import { Menu, X, Languages, ChevronDown, Check ,ArrowRight} from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import './Navbar.css';
 import qprakritimark from './q-prakriti-mark.png';
-
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About Us' },
@@ -131,11 +130,9 @@ export default function Navbar() {
             <span className="nav__theme-toggle__knob" />
           </button>
 
-          <Link to="/contact" className="nav__consult">
-            Book a Demo
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <path d="M7 17L17 7M9 7h8v8" />
-            </svg>
+          
+          <Link to="/book-demo" className="advisory__btn advisory__btn--gold">
+            Book a Demo <ArrowRight size={14} />
           </Link>
         </div>
 

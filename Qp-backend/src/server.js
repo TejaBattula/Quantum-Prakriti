@@ -159,6 +159,50 @@ app.post('/api/contact', limiter, async (req, res) => {
   }
 });
 
+
+
+
+const calendly = (url) =>
+  fetch(url, { headers: { Authorization: `Bearer ${process.env.CALENDLY_TOKEN}` } });
+
+app.post("/api/booking-notify", express.json(), async (req, res) => {
+  try {
+    const { inviteeUri } = req.body;
+
+    // Calendly URL ye ani check chey
+    const u = new URL(inviteeUri);
+    if (u.protocol !== "https:" || u.hostname !== "api.calendly.com") {
+      return res.sendStatus(400);
+    }
+
+    // Calendly nundi name, email, time techchuko
+    const inv = (await (await calendly(inviteeUri)).json()).resource;
+    const ev = (await (await calendly(inv.event)).json()).resource;
+
+    const when = new Date(ev.start_time).toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      dateStyle: "full",
+      timeStyle: "short",
+    });
+
+    await resend.emails.send({
+      from: "Q-Prakriti <noreply@yourdomain.com>", // Resend lo verify chesina domain avvali
+      to: ["quantum-prakriti@gmail.com"],
+      replyTo: inv.email,
+      subject: `New demo booked: ${inv.name}`,
+      html: `
+        <p><b>Name:</b> ${inv.name}</p>
+        <p><b>Email:</b> ${inv.email}</p>
+        <p><b>Time (IST):</b> ${when}</p>
+      `,
+    });
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error("booking-notify error:", err);
+    res.sendStatus(500);
+  }
+});
 mongoose
   .connect(MONGODB_URI)
   .then(() => {
