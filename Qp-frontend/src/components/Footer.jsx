@@ -92,13 +92,13 @@ export default function Footer() {
               <li>
                 <Mail size={16} aria-hidden="true" />
                 <a href="mailto:contact@q-prakrithi.example">
-                  contact@q-prakrithi.example
+                  quantum-prakriti@gmail.com
                 </a>
               </li>
 
               <li>
                 <MapPin size={16} aria-hidden="true" />
-                <span>Office Address — Placeholder</span>
+                <span>Office Address — Added soon</span>
               </li>
             </ul>
 
@@ -134,10 +134,7 @@ export default function Footer() {
             reserved.
           </span>
 
-          <Link to="/contact" className="footer__cta">
-            Start a conversation
-            <ArrowUpRight size={15} />
-          </Link>
+          
         </div>
       </div>
     </footer>

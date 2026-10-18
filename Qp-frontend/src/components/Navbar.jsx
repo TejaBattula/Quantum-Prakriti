@@ -177,7 +177,7 @@ export default function Navbar() {
           </button>
 
           <Link to="/contact" className="nav__consult">
-            Book
+            Book a Demo
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
               <path d="M7 17L17 7M9 7h8v8" />
             </svg>

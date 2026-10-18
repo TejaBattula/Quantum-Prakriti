@@ -17,6 +17,7 @@ import quantumComputing from '../assets/quantumsafe.jpeg';
 import quantumSafe from '../assets/PQC.png';
 import appliedResearch from '../assets/cryptography-photo.jpeg';
 import QC from "../assets/QC.jpeg"
+import CursorGrid from '../components/CursorGrid.jsx';
 
 const orbitImages = [
   { src: quantumComputing, alt: 'Quantum Computing' },
@@ -167,38 +168,64 @@ const panelBg = (c1, c2) =>
     </svg>`
   )}`;
 
-const serviceItems = [
-  { icon: <ShieldCheck size={20} strokeWidth={1.8} />, label: 'Quantum-Safe Security',
-    description: 'Designing and evaluating systems for a post-quantum security posture.',
-    image: panelBg('#0c1630', '#1b3a8a') },
-  { icon: <Lock size={20} strokeWidth={1.8} />, label: 'Post-Quantum Cryptography',
-    description: 'Exploring PQC standards including ML-KEM, ML-DSA, and SLH-DSA.',
-    image: panelBg('#101a3a', '#3b2f7a') },
-  { icon: <ScanSearch size={20} strokeWidth={1.8} />, label: 'Cryptographic Inventory & CBOM',
-    description: 'Structured discovery and documentation of cryptographic assets.',
-    image: panelBg('#0c1630', '#14607a') },
-  { icon: <ShieldAlert size={20} strokeWidth={1.8} />, label: 'Security Assessment',
-    description: 'Reviewing systems for cryptographic risk and quantum-readiness.',
-    image: panelBg('#1a1a2e', '#6b4f12') },
-  { icon: <Cpu size={20} strokeWidth={1.8} />, label: 'Software Development',
-    description: 'Building secure, modern software with a future-ready mindset.',
-    image: panelBg('#0c1630', '#2a4fb0') },
-  { icon: <Atom size={20} strokeWidth={1.8} />, label: 'Emerging Technologies',
-    description: 'Investigating quantum and adjacent technologies for practical impact.',
-    image: panelBg('#12102e', '#5a2f8a') },
-];
+  const ICON_COLOR = '#D4AF37';               // icon color
+  const ICON_BG = 'rgba(212,175,55,0.15)';    // badge background
+  const ICON_BORDER = 'rgba(212,175,55,0.4)'; // badge border
+  
+  const iconBadge = (Icon) => (
+    <span className="service-icon">
+      <Icon size={20} strokeWidth={1.8} />
+    </span>
+  );
+  
+  const serviceItems = [
+    { icon: iconBadge(ShieldCheck), label: 'Quantum-Safe Security',
+      description: 'Designing and evaluating systems for a post-quantum security posture.',
+      image: panelBg('#0c1630', '#1b3a8a') },
+    { icon: iconBadge(Lock), label: 'Post-Quantum Cryptography',
+      description: 'Exploring PQC standards including ML-KEM, ML-DSA, and SLH-DSA.',
+      image: panelBg('#101a3a', '#3b2f7a') },
+    { icon: iconBadge(ScanSearch), label: 'Cryptographic Inventory & CBOM',
+      description: 'Structured discovery and documentation of cryptographic assets.',
+      image: panelBg('#0c1630', '#14607a') },
+    { icon: iconBadge(ShieldAlert), label: 'Security Assessment',
+      description: 'Reviewing systems for cryptographic risk and quantum-readiness.',
+      image: panelBg('#1a1a2e', '#6b4f12') },
+    { icon: iconBadge(Cpu), label: 'Software Development',
+      description: 'Building secure, modern software with a future-ready mindset.',
+      image: panelBg('#0c1630', '#2a4fb0') },
+    { icon: iconBadge(Atom), label: 'Emerging Technologies',
+      description: 'Investigating quantum and adjacent technologies for practical impact.',
+      image: panelBg('#12102e', '#5a2f8a') },
+  ];
 export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="hero">
-        <div className="hero__bg" aria-hidden="true">
-          <div className="hero__grid-lines" />
-          <div className="hero__glow hero__glow--blue" />
-          <div className="hero__glow hero__glow--gold" />
-        </div>
+      {/* HERO */}
+<section className="hero">
+  <div className="hero__bg" aria-hidden="true">
+  <CursorGrid
+  cellSize={60}
+  color="#D4AF37"
+  gridColor="#D4AF37"
+  highlight="area"
+  gridStyle="lines"
+  radius={100}        // was 140: smaller area around the cursor
+  holdTime={250}      // was 400: lit cells fade sooner
+  fadeDuration={600}  // was 800
+  fillOpacity={0.02}  // was 0.05: softer fill inside lit cells
+  maxOpacity={1.5}    // was 1: dimmer outline on lit cells
+  gridOpacity={0.07}
+  spotlight={0.25}    // was 0.6: less brightening of lines near the cursor
+  edgeFade={0.15}
+  clickPulse
+/>
+    <div className="hero__glow hero__glow--blue" />
+    <div className="hero__glow hero__glow--gold" />
+  </div>
 
-        <div className="container hero__inner">
+  <div className="container hero__inner">
           <motion.div
             className="hero__content"
             initial={{ opacity: 0, y: 30 }}
@@ -279,7 +306,7 @@ export default function Home() {
     rotation={-8}
     duration={30}
     itemSize={210}
-    itemRadius={16}
+    itemRadius={500}
     depth={0.6}
     showPath
     pathColor="rgba(212,175,55,0.35)"

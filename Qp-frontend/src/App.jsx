@@ -6,6 +6,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import QuantumLoader from './components/QuantumLoader.jsx';
+import SplashCursor from './components/SplashCursor.jsx';
 
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
@@ -102,6 +103,9 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      
+  
+    
       {/*
         Main website is ALWAYS mounted.
         Why: the loader needs #quantum-slot to exist in the DOM
@@ -172,7 +176,21 @@ export default function App() {
           />
         </Routes>
       </AnimatePresence>
-
+      <SplashCursor
+        rainbow={false}
+        colors={['#D4AF37', '#4f7fff', '#8cb8e8']}
+        intensity={0.6}
+        size={0.8}
+        force={0.8}
+        swirl={3}
+        trail={0.8}
+        shading={0.6}
+        glow={0}
+        quality="medium"
+        clickSplash
+        intro={false}
+        zIndex={5}
+      />
       <Footer />
     </ThemeProvider>
   );
