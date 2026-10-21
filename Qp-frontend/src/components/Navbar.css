@@ -68,6 +68,10 @@
   gap: 12px;
   flex-shrink: 0;
 }
+.advisory__btn.advisory__btn--gold{
+  margin-right: 20px;
+
+}
 .nav__icon-btn {
   width: 30px; height: 30px;
   display: grid; place-items: center;
