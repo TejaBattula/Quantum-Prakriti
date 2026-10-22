@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
  * Usage: render <BlochCursor /> once, near the root of your app (e.g. in App.jsx).
  * Props: size (px, default 96)
  */
-export default function BlochCursor({ size = 46 }) {
+export default function BlochCursor({ size = 26 }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {

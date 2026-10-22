@@ -9,7 +9,7 @@
   align-items: center;
 }
 h1 {
-  font-family: var(--heading);
+  font-family: "regular 400 italic";
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   font-weight: 600;
   line-height: 1.08;
