@@ -647,3 +647,4 @@ h1 {
 [data-theme="light"] .intro__orbit .orbit-item-inner {
   box-shadow: 0 8px 24px rgba(130, 100, 30, 0.18);
 }
+.depth-carousel__dot.is-active { background: #D4AF37; }

@@ -11,7 +11,7 @@ import SectionHeading from '../components/SectionHeading.jsx';
 import QTechModalCards from '../components/QTModalCards.jsx';
 import StrokeText from '../components/StrokeText.jsx';
 import AccordionGallery from '../components/AccordionGallery.jsx';
-import OrbitImages from '../components/OrbitImages.jsx';
+import DepthCarousel from '../components/DepthCarousel.jsx';
 import '../styles/home.css';
 import quantumComputing from '../assets/quantumsafe.jpeg';
 import quantumSafe from '../assets/PQC.png';
@@ -19,13 +19,13 @@ import appliedResearch from '../assets/cryptography-photo.jpeg';
 import QC from "../assets/QC.jpeg"
 import CursorGrid from '../components/CursorGrid.jsx';
 
-const orbitImages = [
-  { src: quantumComputing, alt: 'Quantum Computing' },
-  { src: quantumSafe, alt: 'Quantum-Safe Security' },
-  { src: appliedResearch, alt: 'Applied Research' },
-  { src: QC, alt: 'Quantum research' },
-
+const carouselItems = [
+  { image: quantumComputing, alt: 'Quantum Computing' },
+  { image: quantumSafe, alt: 'Quantum-Safe Security' },
+  { image: appliedResearch, alt: 'Applied Research' },
+  { image: QC, alt: 'Quantum research' },
 ];
+
 const partners = [
   { name: 'Partner One', logo: null },     // logo: '/logos/partner-one.png'
   { name: 'Partner Two', logo: null },
@@ -298,22 +298,24 @@ export default function Home() {
           </motion.div>
 
           <motion.div className="intro__orbit" {...fadeUp}>
-  <OrbitImages
-    images={orbitImages}
-    shape="ellipse"
-    radiusX={380}
-    radiusY={130}
-    rotation={-8}
-    duration={30}
-    itemSize={210}
-    itemRadius={500}
-    depth={0.6}
-    showPath
-    pathColor="rgba(212,175,55,0.35)"
-    pathDash={6}
-    hoverSpeed={0.2}
-    centerContent={<span className="intro__orbit-label">Q-Prakriti</span>}
-  />
+  <div style={{ height: '500px', position: 'relative' }}>
+    <DepthCarousel
+      items={carouselItems}
+      cardWidth={300}
+      cardHeight={380}
+      tint="#060b1c"
+      depth={220}
+      spread={90}
+      tilt={22}
+      tiltDirection="right"
+      perspective={1400}
+      visibleCards={4}
+      falloff={0.2}
+      blur={6}
+      autoplay
+      loop
+    />
+  </div>
 </motion.div>
         </div>
       </section>
