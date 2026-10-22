@@ -120,7 +120,7 @@ export default function Navbar() {
           <button
             className="nav__theme-toggle"
             onClick={toggleTheme}
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label={theme === 'light' ? 'Switch to dark mode': 'Switch to light mode' }
             data-active={theme}
           >
             <div className="nav__theme-toggle__track">

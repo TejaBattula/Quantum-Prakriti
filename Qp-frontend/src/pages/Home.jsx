@@ -10,7 +10,6 @@ import QuantumVisual from '../components/QuantumCore.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import QTechModalCards from '../components/QTModalCards.jsx';
 import StrokeText from '../components/StrokeText.jsx';
-import AccordionGallery from '../components/AccordionGallery.jsx';
 import DepthCarousel from '../components/DepthCarousel.jsx';
 import '../styles/home.css';
 import quantumComputing from '../assets/quantumsafe.jpeg';
@@ -18,6 +17,8 @@ import quantumSafe from '../assets/PQC.png';
 import appliedResearch from '../assets/cryptography-photo.jpeg';
 import QC from "../assets/QC.jpeg"
 import CursorGrid from '../components/CursorGrid.jsx';
+import BlochCursor from '../components/BlochCursor.jsx';
+import StackingCards from '../components/StackingCards.jsx';
 
 const carouselItems = [
   { image: quantumComputing, alt: 'Quantum Computing' },
@@ -204,6 +205,7 @@ export default function Home() {
       {/* HERO */}
       {/* HERO */}
 <section className="hero">
+
   <div className="hero__bg" aria-hidden="true">
   <CursorGrid
   cellSize={60}
@@ -232,6 +234,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
+             <BlochCursor />
             <span className="eyebrow">Quantum · Security · Innovation</span>
             <h1 style={{lineHeight :"25px",marginTop : "20px"}}>
               Engineering a
@@ -345,20 +348,7 @@ export default function Home() {
             title="Proposed service categories"
             description="Draft categories reflecting our technology direction. Confirm with Q-Prakriti for final service offerings."
           />
-          <AccordionGallery
-            items={serviceItems}
-            defaultIndex={0}
-            expandRatio={0.46}
-            trigger="hover"
-            height={420}
-            gap={10}
-            radius={18}
-            accentColor="#D4AF37"
-            overlayColor="#060b1c"
-            textColor="#ffffff"
-            grayscale={false}
-            tilt={6}
-          />
+          <StackingCards items={serviceItems} />
           <div className="center-cta">
             <Link to="/services" className="btn btn--ghost btn--md">
               View All Services <ArrowRight size={16} className="btn__icon" />
