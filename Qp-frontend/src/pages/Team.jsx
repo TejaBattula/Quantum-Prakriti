@@ -86,16 +86,20 @@ export default function Team() {
                 {/* Social Media Links */}
                 <div className="team-card__socials">
                   <a
+                    className='team-card__socials_linkedin'
                     href={m.social.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`${m.name} on LinkedIn`}
                     title="LinkedIn"
+                    
                   >
                     <FaLinkedinIn size={18} />
                   </a>
 
                   <a
+                    className='team-card__socials_github'
+
                     href={m.social.github}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -106,6 +110,8 @@ export default function Team() {
                   </a>
 
                   <a
+                    className='team-card__socials_email'
+
                     href={m.social.email}
                     aria-label={`Email ${m.name}`}
                     title="Email"
