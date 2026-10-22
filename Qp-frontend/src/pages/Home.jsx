@@ -10,7 +10,7 @@ import QuantumVisual from '../components/QuantumCore.jsx';
 import SectionHeading from '../components/SectionHeading.jsx';
 import QTechModalCards from '../components/QTModalCards.jsx';
 import StrokeText from '../components/StrokeText.jsx';
-import DepthCarousel from '../components/DepthCarousel.jsx';
+import FlexCarousel from '../components/FlexCarousel.jsx';
 import '../styles/home.css';
 import quantumComputing from '../assets/quantumsafe.jpeg';
 import quantumSafe from '../assets/PQC.png';
@@ -22,10 +22,30 @@ import StackingCards from '../components/StackingCards.jsx';
 import Particles from '../components/Particles.jsx';
 
 const carouselItems = [
-  { image: quantumComputing, alt: 'Quantum Computing' },
-  { image: quantumSafe, alt: 'Quantum-Safe Security' },
-  { image: appliedResearch, alt: 'Applied Research' },
-  { image: QC, alt: 'Quantum research' },
+  {
+    src: quantumComputing,
+    alt: 'Quantum computing technology',
+    title: 'Quantum Computing',
+    subtitle: 'Beyond classical computation',
+  },
+  {
+    src: quantumSafe,
+    alt: 'Post-quantum cryptography',
+    title: 'Quantum-Safe Security',
+    subtitle: 'Preparing for the quantum era',
+  },
+  {
+    src: appliedResearch,
+    alt: 'Applied cryptography research',
+    title: 'Applied Research',
+    subtitle: 'Turning research into innovation',
+  },
+  {
+    src: QC,
+    alt: 'Quantum computing research',
+    title: 'Quantum Innovation',
+    subtitle: 'Building future-ready technology',
+  },
 ];
 
 const partners = [
@@ -320,23 +340,24 @@ export default function Home() {
             </Link>
           </motion.div>
 
-          <motion.div className="intro__orbit" {...fadeUp}>
-  <div style={{ height: '500px', position: 'relative' }}>
-    <DepthCarousel
+          <motion.div
+  className="intro__orbit"
+  {...fadeUp}
+>
+  <div className="intro__flex-carousel">
+    <FlexCarousel
       items={carouselItems}
-      cardWidth={300}
-      cardHeight={380}
-      tint="#060b1c"
-      depth={220}
-      spread={90}
-      tilt={22}
-      tiltDirection="right"
-      perspective={1400}
-      visibleCards={4}
-      falloff={0.2}
-      blur={6}
+      preset="liquid"
+      intro="rise"
+      fit="landscape"
+      cardHeight={0.48}
+      gap={16}
+      radius={18}
+      squeeze={0.18}
+      focusOnClick
+      captions
       autoplay
-      loop
+      interval={5}
     />
   </div>
 </motion.div>
