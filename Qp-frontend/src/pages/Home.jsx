@@ -363,7 +363,10 @@ export default function Home() {
 
       {/* SERVICES PREVIEW */}
       <section className="section section--blue">
+      <ParticlesBackdrop />
+
         <div className="container">
+
           <SectionHeading
             eyebrow="Capabilities"
             title="Proposed service categories"
