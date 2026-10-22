@@ -19,6 +19,7 @@ import QC from "../assets/QC.jpeg"
 import CursorGrid from '../components/CursorGrid.jsx';
 import BlochCursor from '../components/BlochCursor.jsx';
 import StackingCards from '../components/StackingCards.jsx';
+import Particles from '../components/Particles.jsx';
 
 const carouselItems = [
   { image: quantumComputing, alt: 'Quantum Computing' },
@@ -45,6 +46,25 @@ const customers = [
   { name: 'Customer Six', logo: null },
 ];
 
+const PARTICLE_COLORS = ['#D4AF37', 'white'];
+
+const ParticlesBackdrop = () => (
+  <div className="section-particles" aria-hidden="true">
+    <Particles
+      particleColors={PARTICLE_COLORS}
+      particleCount={160}
+      particleSpread={10}
+      speed={0.08}
+      particleBaseSize={80}
+      glow={0.5}
+      twinkle={0.3}
+      moveParticlesOnHover
+      hoverEffect="parallax"
+      clickBurst={false}
+      intro={false}
+    />
+  </div>
+);
 /* Infinite scrolling row: list is rendered twice so the loop is seamless */
 function Marquee({ items, reverse = false, duration = 30 }) {
   const loop = [...items, ...items];
@@ -324,7 +344,8 @@ export default function Home() {
       </section>
 
       {/* QUANTUM TECHNOLOGY */}
-      <section className="section section--dark">
+      <section className="section section--dark has-particles">
+        <ParticlesBackdrop />
         <div className="container">
           <SectionHeading
             eyebrow="Quantum Technology"
@@ -358,7 +379,8 @@ export default function Home() {
       </section>
 
       {/* WHY CHOOSE US */}
-      <section className="section section--dark">
+      <section className="section section--dark has-particles">
+        <ParticlesBackdrop />
         <div className="container">
           <SectionHeading eyebrow="Why Q-Prakriti" title="Principles that guide our work" align="center" />
           <div className="grid grid-3 values">
@@ -409,6 +431,7 @@ export default function Home() {
       {/* FINAL CTA */}
       <section className="cta-final">
         <div className="cta-final__bg" aria-hidden="true">
+        <ParticlesBackdrop />
           <div className="cta-final__glow" />
           <svg className="cta-final__circuit" viewBox="0 0 600 300" preserveAspectRatio="none">
             <path d="M0 150 Q150 30 300 150 T600 150" stroke="rgba(212,175,55,0.25)" strokeWidth="1" fill="none" />

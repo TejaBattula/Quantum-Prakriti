@@ -648,3 +648,10 @@ h1 {
   box-shadow: 0 8px 24px rgba(130, 100, 30, 0.18);
 }
 .depth-carousel__dot.is-active { background: #D4AF37; }
+/* ========= Particles backdrop on dark sections ========= */
+.has-particles { position: relative; overflow: hidden; isolation: isolate; }
+.has-particles > .container { position: relative; z-index: 1; }
+.section-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+/* particles are white/gold on black, so hide them in the ivory theme */
+[data-theme="light"] .section-particles { display: none; }

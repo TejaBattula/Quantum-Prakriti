@@ -53,7 +53,6 @@ function StackCard({ item, index, stackGap, progress, range, targetScale }) {
         style={{ scale, top: `calc(-4vh + ${index * stackGap}px)` }}
       >
         <div className="stack__body">
-          {item.icon}
           <h3 className="stack__title">{item.label}</h3>
           <p className="stack__desc">{item.description}</p>
           {item.to && (
