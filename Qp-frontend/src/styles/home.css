@@ -654,4 +654,7 @@ h1 {
 .section-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 
 /* particles are white/gold on black, so hide them in the ivory theme */
-[data-theme="light"] .section-particles { display: none; }
+/* [data-theme="light"] .section-particles { display: none; } */
+.section-particles { width: 100%; height: 100%; }
+.section-particles > *,
+.section-particles canvas { width: 100%; height: 100%; display: block; }
