@@ -188,7 +188,7 @@ export default function Contact() {
                 <Mail size={18} />
                 <div>
                   <strong>Email</strong>
-                  <span>quantumprakriti@gmail.com</span>
+                  <span>info@qprakriti.com</span>
                 </div>
               </li>
 
@@ -196,7 +196,7 @@ export default function Contact() {
                 <Phone size={18} />
                 <div>
                   <strong>Phone</strong>
-                  <span>+00 000 000 0000 (placeholder)</span>
+                  <span>+91 9618225394</span>
                 </div>
               </li>
 
@@ -204,7 +204,7 @@ export default function Contact() {
                 <MapPin size={18} />
                 <div>
                   <strong>Office Address</strong>
-                  <span>Office address placeholder — to be confirmed.</span>
+                  <span>4th floor,Medha Hi-tech City,Sy. No. 53,<br/>Kesarapalli,Gannavaram,Vijayawada,Andhra Pradesh 521102,India.</span>
                 </div>
               </li>
             </ul>
