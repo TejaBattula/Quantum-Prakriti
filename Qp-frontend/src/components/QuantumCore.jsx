@@ -238,7 +238,7 @@ const QuantumComputerModel = () => {
 const QuantumVisual = () => {
   return (
     // FIXED: Removed absolute positioning and hardcoded left/top offsets.
-    // It now fills the parent container (hero__visual) naturally.
+    // It now fills the parent container (hero__visual).
     <div style={{ width: '100%', height: '80vh', position: 'relative' }}>
       <Canvas 
         camera={{ position: [10, -2, 24], fov: 55 }}
