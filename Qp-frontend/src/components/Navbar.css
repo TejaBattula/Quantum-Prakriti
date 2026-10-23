@@ -161,8 +161,8 @@
 
 /* ===== THEME TOGGLE BUTTON ===== */
 .nav__theme-toggle {
-  max-width: 62px;
-  max-height: 25px;
+  max-width: 63.5px;
+  max-height: 27px;
   border-radius: 99px;
   border: 1.5px solid rgba(212, 175, 55, 0.35);
   background: rgba(255, 255, 255, 0.06);
@@ -183,7 +183,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 4px;
+  padding: 0 3px;
   pointer-events: none;
 }
 .nav__theme-toggle__icon {
