@@ -44,7 +44,7 @@ export default function Team() {
             align="center"
           />
 
-          <div className="grid grid-3">
+          <div className="grid grid-2">
             {placeholders.map((m, i) => (
               <motion.article
                 key={m.id}
