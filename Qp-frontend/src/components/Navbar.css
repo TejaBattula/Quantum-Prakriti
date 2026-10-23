@@ -538,6 +538,10 @@
 
 /* Smaller phones */
 @media screen and (max-width: 480px) {
+  .nav{
+    max-width: 98% !important;
+
+  }
   .nav__inner {
     height: 60px;
   }
@@ -604,5 +608,8 @@
 
   [data-theme="light"] .nav__toggle {
     color: #101828;
+  }
+  .nav__mobile-theme{
+    display: none !important;
   }
 }
