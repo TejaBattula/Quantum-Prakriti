@@ -130,7 +130,7 @@ export default function Footer() {
 
         <div className="footer__base">
           <span>
-            © {new Date().getFullYear()} Q-Prakrithi Private Limited. All rights
+            © {new Date().getFullYear()} Q-Prakriti Private Limited. All rights
             reserved.
           </span>
 
