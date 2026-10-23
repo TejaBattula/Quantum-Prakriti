@@ -7,6 +7,14 @@
   transition: all var(--dur) var(--ease);
   position: relative;
   overflow: hidden;
+  width: 500px;
+  
+}
+.grid.grid-3{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 .team-card::after {
   content: '';
@@ -70,6 +78,7 @@
   background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(248, 247, 242, 0.95));
   border-color: rgba(229, 224, 213, 0.8);
   box-shadow: 0 8px 28px -8px rgba(130, 100, 30, 0.06);
+  width: 500px;
 }
 [data-theme="light"] .team-card:hover {
   border-color: rgba(201, 162, 39, 0.5);
