@@ -15,7 +15,7 @@ import {
 import SectionHeading from '../components/SectionHeading.jsx';
 import '../styles/team.css';
 
-const placeholders = Array.from({ length: 3 }).map((_, i) => ({
+const placeholders = Array.from({ length: 2 }).map((_, i) => ({
   id: i,
   name: 'Team Member',
   role: 'Designation Placeholder',
@@ -24,7 +24,7 @@ const placeholders = Array.from({ length: 3 }).map((_, i) => ({
   social: {
     linkedin: 'https://www.linkedin.com/',
     github: 'https://github.com/',
-    email: 'mailto:contact@quantumprakriti.com',
+    email: 'mailto:info@qprakriti.com',
     portfolio: 'https://quantumprakriti.com/',
   },
 }));
@@ -32,31 +32,13 @@ const placeholders = Array.from({ length: 3 }).map((_, i) => ({
 export default function Team() {
   return (
     <>
-      {/* Page Hero */}
-      <section className="page-hero">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-          >
-            <span className="eyebrow">Our Team</span>
-
-            <h1>The people behind Q-Prakrithi</h1>
-
-            <p className="page-hero__lead">
-              A multidisciplinary team spanning technology, security, and
-              research. Official team information will be added soon.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* Team Section */}
       <section className="section section--dark">
         <div className="container">
           <SectionHeading
-            eyebrow="Placeholder Profiles"
+            eyebrow="Our Team"
             title="Team information coming soon"
             description="We do not currently display real names, photographs, or designations. These cards are placeholders awaiting official content."
             align="center"
