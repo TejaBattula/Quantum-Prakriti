@@ -98,7 +98,7 @@ export default function Footer() {
 
               <li>
                 <MapPin size={16} aria-hidden="true" />
-                <span>Office Address — Added soon</span>
+                <span>Office Address — 4th floor,Medha Hi-tech City,Sy.No.53,Kesarapalli,Gannavaram,Vijayawada,Andhra Pradesh 521102,India.</span>
               </li>
             </ul>
 
