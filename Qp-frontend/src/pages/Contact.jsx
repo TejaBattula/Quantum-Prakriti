@@ -150,25 +150,7 @@ export default function Contact() {
 
   return (
     <>
-      {/* PAGE INTRODUCTION */}
-      <section className="page-hero">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55 }}
-          >
-            <span className="eyebrow">Contact</span>
-
-            <h1>Let's start a conversation</h1>
-
-            <p className="page-hero__lead">
-              Share your questions, ideas, or requirements.
-              We'd love to hear from you.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      
 
       {/* CONTACT SECTION */}
       <section className="section section--dark">
