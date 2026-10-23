@@ -206,11 +206,9 @@
 
 /* ===== LIGHT THEME NAVBAR — REFINED IVORY ===== */
 [data-theme="light"] .nav {
-  background: rgba(248, 247, 242, 0.84);
   border-bottom-color: rgba(229, 224, 213, 0.8);
 }
 [data-theme="light"] .nav--scrolled {
-  background: rgba(248, 247, 242, 0.97);
   border-bottom-color: rgba(201, 162, 39, 0.28);
   box-shadow: 0 8px 32px -12px rgba(130, 100, 30, 0.12);
 }
